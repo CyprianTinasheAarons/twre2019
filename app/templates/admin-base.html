@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% block head %}
+
+ 
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+      
+   
+    <style>
+          #btn{
+        background-color:#880e4f;
+        color: white;
+    }
+
+   
+.easyPaginateNav a {padding:5px;}
+.easyPaginateNav a.current {font-weight:bold;text-decoration:underline;} 
+
+
+    </style> 
+   
+    {% endblock %}
+</head>
+<body>
+    <div class="container-fluid">
+{% block navbar %}
+        <nav class="navbar navbar-expand-lg  sticky-top navbar-light p-2" >
+            
+                    <a href="" class="navbar-brand mx-2">
+                        <img src="{{ url_for('static', filename='img/twre.png')}}" width="50" height="50"  alt="">
+                    </a>
+                    <h3 class="d-inline align-middle lead mx-4">TWRE</h3>
+                    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+                        <span class="navbar-toggler-icon">
+        
+                        </span>
+        
+        
+                    </button>
+        
+                    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a href="/" class="nav-link active">Home</a>
+            </li>
+            <li class="nav-item">
+                    <a href="/properties" class="nav-link">Properties</a>
+                </li>
+                <li class="nav-item">
+                        <a href="/blog" class="nav-link">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                            <a href="/about" class="nav-link">About</a>
+        
+                        </li>
+                        
+                            
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="/user" class="nav-link">
+                        <i class="fa fa-user"></i>
+                        </a>
+                    </li>
+                     {% endif %}
+
+                     </li>
+                      {% if current_user.is_authenticated %}
+        
+        <li class="nav-item"> <a class="nav-link btn btn-light " href="{{ url_for('auth.logout') }}">Logout</a></li>
+        {% else %}
+        
+        <li class="nav-item"><a class="nav-link btn btn-light " href="{{ url_for('auth.login') }}">Login</a></li>
+        {% endif %}
+        </li>
+        
+                                <li class="nav-item">
+                                        <a href="/auth/signup" class="nav-link lead  btn btn-primary text-white">SignUp</a>
+                    
+                                    </li>
+                                    
+        <li  class="nav-item">
+                
+                <a class="btn btn-light border border-primary nav-link "
+                href="{{ url_for('main.admin') }}">
+               <small>Admin</small>
+                </a>
+         
+          
+        </li>
+                                    <li> <div class="d-flex flex-row justify-content-center">
+                                        <div class="p-2"><a href=""><i class="fa fa-facebook"></i></a></div>
+                                        <div class="p-2"><a href=""><i class="fa fa-twitter"></i></a></div>
+                                        <div class="p-2"><a href=""><i class="fa fa-instagram"></i></a></div>
+                                        <div class="p-2"><a href=""><i class="fa fa-whatsapp"></i></a></div>
+                                        <div class="p-2"><a href=""><i class="fa fa-envelope-o"></i></a></div>
+                                    </div></li>
+        </ul>
+                    </div>
+                
+            </nav>
+
+{% endblock %}
+
+<br>
+
+<h1 class="lead mx-2">
+    <a class="btn btn-light border border-primary" href="/admin"> <i class="fa fa-arrow-left"></i>     Dashboard</a>
+</h1>
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-light  bg-primary text-white p-2 m-2 floating-alert text-center">
+{{ message }}
+</div>
+
+{% endfor %}
+
+
+        {% block content %}
+     
+        {% block page_content %}{% endblock %}
+   
+        {% endblock %}
+
+<!-- footer -->
+<footer id="main-footer" class="bg-primary  ">
+        
+            <div class="row">
+                <div class="col">
+                    <h4  class="text-center display-4  text-white text-center" >T.W.R.E ZIMBABWE </h4>
+                
+                                            
+<div class="row"><div class="col text-center">
+    <p class="lead text-white" >Copyright  &copy; 2019 All rights reserved|Website designed by <a href="www.topia263.co.zw" class="text-white"> Topia263</a></p>
+
+                    
+  
+   
+</div></div>
+<br>
+               
+                </div>
+            </div>
+        
+    </footer>
+      </div>
+
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/ckeditor.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.easyPaginate.js') }}"></script>
+<script>
+$(document).ready(function() {
+    // show the alert
+    setTimeout(function() {
+        $(".alert").alert('close');
+    }, 5000);
+});
+</script> 
+ <script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'editor1' );
+            </script>
+<script>
+$('#easyPaginate').easyPaginate({
+    paginateElement: 'tr',
+    elementsPerPage: 4
+});
+</script>
+    </body>
+    </html>

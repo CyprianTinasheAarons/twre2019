@@ -1,0 +1,36 @@
+
+       
+    {% for i in usersList %}
+  
+
+    <tr class="users ">
+
+    <div class="user-body lead">
+       <td>{{i[0]}}</td> 
+      <td>{{i[1]}}</td>
+
+        <td>   {{i[2]}}</td>
+         <td>
+           {{i[3]}}
+         </td>
+         <td>
+      
+   <a 
+       href="{{ url_for('main.edit_profile_admin', id=i[0]) }}">
+       <i data-toggle="tooltip" data-placement="top" title="Edit" class="fa fa-edit"></i>
+       </a> 
+ <a 
+       href="{{ url_for('main.delete_user', id=i[0]) }}">
+       <i  data-toggle="tooltip" data-placement="top" title="Delete" class="fa fa-trash">
+       </i>
+       </a>
+         </td>
+  
+            </div>
+
+
+        </tr>
+
+
+{% endfor %}
+

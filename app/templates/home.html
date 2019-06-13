@@ -1,0 +1,80 @@
+{%  extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}   <title> TWRE:Home</title>{% endblock %}
+{% block content %}
+ <!-- SHOWCASE SLIDER -->
+ <section id="showcase" >
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item carousel-image-1 active">
+          <div class="container">
+            <div class="carousel-caption d-none d-sm-block text-right mb-5">
+              <h1 class="display-3">Tony West Real Estate</h1>
+              <p class="lead">The best properties in Zimbabwe.</p>
+              <a href="{{url_for('auth.signup')}}" class="btn btn-primary btn-lg">Sign Up Now</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item carousel-image-2">
+          <div class="container">
+            <div class="carousel-caption d-none d-sm-block mb-5">
+              <h1 class="display-3">Properties</h1>
+            
+              <a href="{{url_for('.properties')}}" class="btn btn-primary btn-lg">View Properties</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item carousel-image-1">
+          <div class="container">
+            <div class="carousel-caption d-none d-sm-block text-right mb-5">
+              <h1 class="display-3">Rentals</h1>
+              <p class="lead">Best rental properties in Zimbabwe</p>
+              <a href="{{url_for('.properties')}}" class="btn btn-primary btn-lg">View Properties</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="#myCarousel" data-slide="prev" class="carousel-control-prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+
+      <a href="#myCarousel" data-slide="next" class="carousel-control-next">
+        <span class="carousel-control-next-icon"></span>
+      </a>
+    </div>
+  </section>
+  <hr>
+
+
+   
+</section>
+<!-- LATEST PROPERTY -->
+<section  id="property">
+    <h1 class="display-4 text-center p-4">
+         Latest Properties
+    </h1>
+
+    <hr>
+    <!-- Card Property list 4 new properties -->
+  
+<h1 class="text-center">
+ <a href="http:/properties" class="lead btn btn-grey text-primary  border border-primary  ">
+            View All
+            </a>
+            </h1>
+<div class="row">
+  {% include '_properties-home.html' %}
+</div>
+</section>
+<hr>
+
+
+   {% endblock %}

@@ -1,0 +1,50 @@
+
+       
+               <!-- current property title  -->
+    <div>
+        <h4 class="text-center display-4">
+            {{estate['title']}}
+        </h4>
+    </div>
+
+<br>
+  
+       
+               <div class="card  border border-white">
+   <div class="card-img-top bg-white">
+        <img src="{{estate['image'][0]['photo']}}" alt="image" class="card-img-top">
+          </div>
+           
+                               <div class="card-body bg-light">
+                                               
+                        <h4 class="card-title lead "><strong> {{ estate['category'] }}</strong></h4>
+                        <h4 class="card-title lead "><strong>${{estate['price']}}
+                        </strong></h4>
+                        <h4 class="card-title lead " ><strong> <a href="http://maps.google.com/?q={{estate['address']}}" data-toggle="tooltip" data-placement="top" title="Click For Map">
+                               {{estate['address']}}
+                               </a></strong></h4>
+                               <p class="lead">
+                                   {{estate['body'] | safe}}
+                               </p>
+                           <h1 class="lead text-primary text-center">
+                               Photos
+                           </h1>   
+          <div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="row">
+           {% for i in estate['image']%}
+            <a href="{{i['photo']}}" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
+                <img src="{{i['photo']}}" class="img-fluid">
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+       
+      
+           </div>
+         </div>
+       
+             
+    
+          

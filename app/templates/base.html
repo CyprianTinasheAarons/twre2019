@@ -1,0 +1,402 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/ekko-lightbox.css') }}">
+   {% block title %} <title>TWRE</title> {% endblock %}
+
+    {% endblock %}
+    <style>
+
+    #btn{
+        background-color:#880e4f;
+        color: white;
+
+    }
+#center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
+}
+
+.loader{
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  
+   
+}
+
+
+/* LOADER 2 */
+
+#loader-2 span{
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  background-color: #880e4f;
+  margin: 35px 5px;
+}
+
+#loader-2 span:nth-child(1){
+  animation: bounce 1s ease-in-out infinite;
+}
+
+#loader-2 span:nth-child(2){
+  animation: bounce 1s ease-in-out 0.33s infinite;
+}
+
+#loader-2 span:nth-child(3){
+  animation: bounce 1s ease-in-out 0.66s infinite;
+}
+
+@keyframes bounce{
+  0%, 75%, 100%{
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  25%{
+    -webkit-transform: translateY(-20px);
+    -ms-transform: translateY(-20px);
+    -o-transform: translateY(-20px);
+    transform: translateY(-20px);
+  }
+}
+
+.easyPaginateNav a {padding:5px;}
+.easyPaginateNav a.current {font-weight:bold;text-decoration:underline;}
+    </style>
+</head>
+<body onload="myFunction()">
+   <div class="container-fluid">
+{% block navbar %}
+
+           <nav class="navbar navbar-expand-lg sticky-top navbar-light  p-2 " >
+             
+                       
+                    <a href="" class="navbar-brand mx-2">
+                        <img src="{{ url_for ('static' , filename='img/twre.png')}}"  width="50" height="50"  alt="">
+                    </a>
+                    <h3 class="d-inline align-middle lead mx-4">TWRE</h3>
+                    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+                        <span class="navbar-toggler-icon">
+        
+                        </span>
+        
+        
+                    </button>
+        
+                    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a href="/" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+                    <a href="/properties" class="nav-link">Properties</a>
+                </li>
+                <li class="nav-item">
+                        <a href="/blog" class="nav-link">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                            <a href="/about" class="nav-link">About</a>
+        
+                        </li>
+                        
+                            
+                     {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="/user" class="nav-link">
+                        <i class="fa fa-user"></i>
+                        </a>
+                    </li>
+                     {% endif %}
+                   
+                     </li>
+                      {% if current_user.is_authenticated %}
+        
+        <li class="nav-item"> <a class="nav-link btn btn-light"href="{{ url_for('auth.logout') }}">Logout</a></li>
+        {% else %}
+        
+        <li class="nav-item"><a class="nav-link btn btn-light" href="{{ url_for('auth.login') }}">Login</a></li>
+        {% endif %}
+        </li>
+        
+                                <li class="nav-item">
+                                        <a href="/auth/signup" class="nav-link  btn lead btn-primary text-white">SignUp</a>
+                    
+                                    </li>
+                                     <li  class="nav-item">
+                                 
+           {%  if current_user.is_authenticated %}
+           {% if current_user.is_admin == True %}
+                <a class="btn btn-light border border-primary nav-link "
+                href="{{ url_for('main.admin') }}">
+               <small>Admin</small>
+                </a>
+                {% endif %}
+                {% endif %}
+  
+          
+        </li>
+                 
+      
+                                    <li> <div class="d-flex flex-row justify-content-center">
+                                        <div class="p-2"><a href=""><i class="fa fa-facebook"></i></a></div>
+                                        <div class="p-2"><a href=""><i class="fa fa-twitter"></i></a></div>
+                                        <div class="p-2"><a href=""><i class="fa fa-instagram"></i></a></div>
+                                        <div class="p-2"><a href=""><i class="fa fa-whatsapp"></i></a></div>
+                                        <div class="p-2"><a href=""><i class="fa fa-envelope-o"></i></a></div>
+                                    </div></li>
+        </ul>
+                    </div>
+                
+           
+            </nav>
+
+     
+
+{% endblock %}
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-light  bg-primary text-white p-2 m-2 floating-alert text-center">
+{{ message }}
+</div>
+
+{% endfor %}
+
+
+
+<div  style="display:none;" id="content">
+        {% block content %}
+        
+        {% block page_content %}{% endblock %}
+     
+        {% endblock %}</div>
+
+
+<!-- Preloader -->
+
+     <div class="row" id="loader">
+        <div class="col-md- bg " id="center" >
+        <div class="loader center-text" id="loader-2">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      </div>
+<!-- contact us -->
+<section  class="bg-light text-muted py-5" id="contact">
+    
+            <div class="row">
+                <div class="col-md-6 p-4">
+                    <img  src="{{ url_for ('static', filename='img/img2.jpg')}}" class="img-fluid mb-3 rounded-circle">
+                </div>
+            
+            <div class="col-md-6">
+                <h3 class="display-4 p-4">Contact Us</h3>
+                <div class="d-flex flex-row">
+                    <div class="p-4 align-self-align">
+                        <i class="fa fa-home"></i>
+                    </div>
+                    <div class="p-4 align-self-end">
+                         <p class="text-muted lead"><strong>Harare Address: </strong>275 H.Chitepo Ave,PO Box CY 474 Causeway Harare</p>
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="p-4 align-self-align">
+                        <i class="fa fa-envelope"></i>
+                    </div>
+                    <div class="p-4 align-self-end lead">
+                            <a href="mailto:sales@twre.co.zw" class="text-muted"><strong>Email: </strong>Sales@twre.co.zw</a>
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                        <div class="p-4 align-self-align">
+                            <i class="fa fa-whatsapp"></i>
+                        </div>
+                        <div class="p-4 align-self-end lead">
+                                <a href="tel:+263777918118" class="text-muted"><strong>Whatsapp: </strong>0777918118
+                                    <i><img  src="{{ url_for ('static' , filename='img/WhatsApp_30px.png')}}"  ></i></a>
+                        </div>
+                    </div>
+            </div>
+            </div>
+       
+    </section>
+<hr>
+
+    <!-- Help -->
+<section class="m-1 border border-white " >
+        
+                <h1 class="display-4 text-center">
+                        Help 
+                    </h1>
+            <div class="row ">
+                <div class="col">
+                    <p class="lead text-center">
+                        For any queries related to your user experience with our web application .Get in touch with us via this link
+                       <a href="mailto:help@twre.co.zw">Contact  Us</a>
+                    </p>
+                </div>
+            
+        </div>
+
+
+    </section>
+<hr>
+    <!-- footer -->
+    <footer id="main-footer" class="bg-primary p-4   ">
+          
+                <div class="row">
+                    <div class="col-md-6 ">
+                        <h4  class="text-center display-4  text-white p-4" >T.W.R.E ZIMBABWE </h4>
+                         
+                                       
+                            <p class="lead  text-white text-center ">
+                            .Real Estate Brokers  .Property And Project Managers .Valuers
+                            </p>
+                          
+                            <p class="lead  text-white text-center ">
+                                Estate Agents Registration Number 778 Zimbabwe
+                            </p>
+                    </div>
+                          
+                    <div class="col-md-6 ">
+                
+                        
+                                    
+                                        <h4 class="text-center  text-white display-4 p-4"> Hours </h4>
+                                        <p class="lead  text-white text-center">Monday-Friday &emsp;09 AM-16 PM</p>
+                                     <p class="lead  text-white text-center">   Saturday-Sunday &emsp;Closed</p>
+                                      
+                                 
+                    </div>
+
+                </div>             
+                                                
+<div class="row"><div class="col text-center">
+        <p class="lead text-white" >Copyright  &copy; 2019 All rights reserved|Website designed by <a href="www.topia263.co.zw" class="text-white"> Topia263</a></p>
+
+                        
+        <a href="#email" >
+                <button class="btn btn-light text-primary border border-primary " data-toggle="modal" data-target="#emailModal" >Email Us</button>
+        </a>
+       
+</div></div>
+   <br>
+                   
+                  
+            
+           
+        </footer>
+    
+<!-- email  modal -->
+<div class="modal fade text-dark" id="emailModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="emailModalTitle">
+                    Email Us
+                </h5>
+                <button class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form   enctype="text/plain" method="get" action="mailto:moneywangu@gmail.com"  >
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Email</label>
+                        <input type="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Message</label>
+                        <textarea class="form-control"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                       
+                            <input class="btn btn-primary btn-block" type="submit" value="Send">
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/ekko-lightbox.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.easyPaginate.js') }}"></script>
+
+
+<script>
+$(document).ready(function() {
+    // show the alert
+    setTimeout(function() {
+        $(".alert").alert('close');
+    }, 2000);
+});
+
+
+
+</script>
+
+<script>
+    $(document).on('click', '[data-toggle="lightbox"]', function(event){
+  event.preventDefault();
+  $(this).ekkoLightbox();
+});
+</script>
+<script>
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+<script>
+var myVar;
+
+function myFunction() {
+  myVar = setTimeout(showPage, 2000);
+}
+
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("content").style.display = "block";
+}
+</script>
+<script>
+$('#easyPaginate').easyPaginate({
+    paginateElement: '.my-1',
+    elementsPerPage: 4
+  
+  
+});
+</script>
+
+</body>
+</html>

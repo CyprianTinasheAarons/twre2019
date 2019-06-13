@@ -1,0 +1,29 @@
+{%  extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} <title>TWRE:Properties</title>
+{% endblock%}
+
+{% block content %}
+<div class="p-4">
+  <br>
+<h1 class="display-4 text-center p-4 ">
+        Properties   
+   </h1>
+
+   <!-- SEARCH -->
+<section >
+        <div class="col-md-4 mx-auto " >
+          {{ wtf.quick_form(form ,action='/properties/search' )}}
+        </div>
+ 
+ </section>
+<br>
+<div class="row p-4" id="easyPaginate">
+  {% include '_propertiesSearch.html' %}
+  {% include '_properties.html' %}
+  </div>
+</div>
+
+{% endblock %}
+ 

@@ -1,0 +1,116 @@
+{% extends "admin-base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} Properties{% endblock %}
+{% block content %}
+
+<ul class="list-unstyled list-inline">
+    <li class="list-inline-item">
+    <a class="btn btn-primary text-white m-1"  href="/admin/properties"> <i class="fa fa-home"></i>Properties</a></li>
+    <li class="list-inline-item">
+
+    <a class="btn btn-success  text-white m-1" href="/admin/posts"> <i class="fa fa-pencil"></i>Posts</a></li>
+    <li class="list-inline-item"> 
+
+    <a class="btn btn-warning  m-1" href="/admin/users"> <i class="fa fa-user"></i>Users</a></li>
+</ul>
+
+
+<div class="row">
+<div class="col m-1">
+             
+               
+                <section>
+                    <h1 class="display-4 text-primary text-center">
+                Properties
+
+                    </h1>
+                          
+   <div class="row">
+          <div class="col-md-4 mx-auto">
+
+              {{ wtf.quick_form(form1 ,action='/admin/properties/search') }} 
+             
+          </div>
+                  
+          
+      </div>
+    
+<div class="row">
+    <div class="col-md-4 mx-auto m-1">
+                            <a>
+                <button class="btn btn-primary text-white " data-toggle="modal" data-target="#add_propertyModal" >Add Property</button>
+        </a>
+    </div>
+</div>
+
+
+                      
+                   <div class="table-responsive">
+                                <table class="table table-striped ">
+                                        <thead class="thead">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title</th>
+                                                <th>
+                                                        Category
+                                                </th>
+                                                <th>
+                                                        Address
+                                                </th>
+                                                <th>
+                                                        Price($)
+                                                </th>
+                                                <th>Author</th>
+                                                <th>
+                                                        Property Date
+                                                </th>
+                                                <th>Edit Property</th>
+                                            </tr>
+                                        </thead>
+              <tbody id="easyPaginate">
+                 {% include '_propertylist.html' %}
+        </tbody>
+                   </table>
+                   </div>
+
+                            
+                </section>
+</div>
+</div>
+
+
+<br>
+<!-- add property modal -->
+<div class="modal fade text-dark" role="dialog" tabindex="-1" id="add_propertyModal">
+    <div class="modal-dialog  modal-lg " role="document">
+                
+       
+            <div class="modal-body">
+                
+        
+                <div class="card bg-light border border-primary ">
+                                <div class="card-body">
+                                   
+                                 <div class="lead text-muted ">
+     {{wtf.quick_form(form2,enctype="multipart/form-data" ,action='/admin/properties')}}
+
+        </div>
+   
+</div>
+
+
+
+
+
+
+</div>
+               
+        
+            </div>
+        
+    </div>
+</div>
+
+
+{% endblock %}

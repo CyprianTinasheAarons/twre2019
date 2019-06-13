@@ -1,0 +1,39 @@
+<section>
+        <div class="container">
+                <div class="card bg-white border border-white">
+                        <div class="card-title">
+                                <h1 class="display-4 text-primary text-center">
+                                        "{{post.title}}"
+                                </h1>
+                            
+                              
+                        </div>
+                        <hr>
+                         <div >
+                        <img src="{{post.image}}" alt="blog image" class="card-img-top img-thumbnail img-fluid">
+                        </div>
+                            <div class="row">
+                                        <div class="col">
+  <p class="lead text-primary">
+                                       By TWRE </p>
+                                              <p class="lead"><small>
+                                                      <small>
+                                       Date: {{post.date}}
+                               </small>
+                        </small></p>
+
+                        
+                                     
+                                </div>
+                                </div>
+                             <hr>
+                       
+                        <div class="card-body">
+                               {{post.body_html | safe}} 
+                        </div>
+
+                        
+                </div>
+        </div>
+</section>
+    

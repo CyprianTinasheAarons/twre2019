@@ -1,0 +1,96 @@
+
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block title %} <title>TWRE:Blog</title>
+{% endblock%}
+
+{% block content %}
+
+
+ 
+<div class="row">
+  <div class=" col m-3 p-3 mx-auto">
+<div class="card border border-white ">
+  
+    <h5 class="card-title display-4 text-center p-4 ">Blog</h5>
+    <div class="row">
+      <div class="col-md-5 m-1 mx-auto">
+        <h4 >
+          <strong>      Welcome To TWRE Blog, Where Words Matter.
+</strong>
+
+    </h4>
+    <p class="lead" >
+      We’ll deliver the best stories and ideas on the topics you care about most straight to your homepage, app, or inbox.
+    </p>
+          <div class="row">
+      <div class="col">
+        <ul class="list-unstyled">
+            <div class="btn btn-primary ">
+            <li>
+                <a href="{{url_for('auth.signup')}}" class="lead text-white ">
+                  Sign Up
+                </a>
+            </li>
+            </div>
+            <div class="btn btn-light border  border-primary">
+            <li>
+ <a href="#posts" class="lead ">
+            View Posts
+          </a>
+            </li>
+        
+            </div>
+          </ul>
+          
+      </div>
+    </div>
+    
+      </div>
+           
+      <div class="col-md-4 m-1 mx-auto ">
+
+        <img src="{{url_for('static' ,filename='img/blog.jpg')}}" alt="" class="img-fluid ">
+
+      </div>
+   
+    
+    
+      
+    </div>
+  
+</div>
+  </div>
+</div>
+
+  
+    <div class="col-md-4 mx-auto ">
+         {{wtf.quick_form(form ,action='/blog/search')}}
+         <br>
+  
+ </div>   
+   
+
+
+<br>
+<div class="col-md-8  mx-auto" id="posts">
+    <h1 class="text-muted lead display-4 text-center">
+      Articles
+    </h1>
+  </div>
+
+<!-- posts section -->
+<div class="row" id="easyPaginate">
+    {% include '_postsSearch.html' %}
+    {% include '_posts.html' %}
+</div>
+
+<br>
+
+
+
+
+{% endblock %}
+          

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %} <title>TWRE:Profile</title>
+{% endblock%}
+{% block body %}
+
+{% block content %}
+<br>
+
+<div class="row">
+    <div class="col-md-6 p-4 mx-auto">
+            <div class="card bg-white border border-primary">
+                    <div class="card-body text-center">
+                            <div class="page-header">
+                                    <p class="display-4">Hi {{user.username }}</p>
+                             
+                               <p><span class='lead text-muted'>Email:</span><a href="mailto:{{user.email}}" class="lead">{{user.email}}</a></p>
+                             
+                                <p class="lead"><span class=" text-muted">Name:</span>{{user.name}}</p>
+                                
+                                <p class="lead"><span class="text-muted">Location:</span>{{user.location}}</p>
+                                        <hr><p class="text-center text-muted ">About Me</p>
+                                        <p class="lead text-primary">
+                                            
+                                               {{user.about_me}}
+                                        </p>
+                                                <hr>    
+                                    <a class="btn btn-primary text-white" href="{{ url_for('.edit_profile') }}">
+                                    Edit Profile
+                                    </a>
+                                            
+                                    </div>
+                
+                    </div>
+                </div>
+    </div>
+</div>
+<br>
+
+{% endblock %}
+{% endblock %}

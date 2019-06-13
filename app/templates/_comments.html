@@ -1,0 +1,65 @@
+<br>
+
+        {% for comment in comments %}
+       
+                <div class="col-md-6 mx-auto ">
+
+
+
+{% if comment.disabled %}
+<p class="lead text-danger"><i>Comment removed by Admin.</i></p>
+{% endif %}
+
+        {% if moderate or not comment.disabled %}
+        {% if comment.body_html %}
+        <div class="row">
+            <div class="col">
+              
+                    
+                        <p class="lead"> <small>Comment By: {{ comment.author }}</small>
+                            </p>
+                    
+                        <p class="lead">{{ comment.body_html | safe }} </p>
+                       
+                 
+               
+          
+
+                    <p class="lead ">
+                           <small> Date :{{comment.timestamp}}</small>
+                        </p>
+            
+            
+            </div>
+        </div>
+      
+       
+       
+        
+        {% else %}
+        <p class="lead">
+            {{ comment.body }}
+        </p>
+      
+        {% endif %}
+        {% endif %}
+        {% if moderate %}
+<br>
+<div class="text-center">
+        {% if comment.disabled %}
+        <a class="btn btn-primary" href="{{ url_for('.moderate_enable',
+        id=comment.id, page=page) }}">Enable</a>
+        {% else %}
+        <a class="btn btn-light border border-danger" href="{{ url_for('.moderate_disable',
+        id=comment.id, page=page) }}">Disable</a>
+        {% endif %}
+        {% endif %}
+        
+</div>
+<br>
+
+
+</div>
+
+<hr>
+{% endfor %}

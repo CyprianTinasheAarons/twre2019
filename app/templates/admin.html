@@ -1,0 +1,95 @@
+{% extends 'admin-base.html' %}
+{% block title%} Dashboard {% endblock %}
+
+{% block content %}
+
+<h1 class="display-4 text-primary text-center">
+      DashBoard
+</h1>
+
+                  <div class="row ">
+                              <div class="col-md-3">
+                                          <div class="card text-center bg-primary text-white mb-4">
+                                              <div class="card-body">
+                                                  <h3>Properties</h3>
+                                                  <h1 class="display-4">
+                                                      <i class="fa fa-home"></i>
+                                                    {{ count_estates}}
+                  
+                                                  </h1>
+                                                  <a href="/admin/properties" class="btn btn-outline-light btn-sm">View</a>
+                                              </div>
+                                          </div>
+                              </div>
+                              <div class="col-md-3 ">
+                                          <div class="card text-center bg-success text-white mb-4">
+                                                  <div class="card-body">
+                                                      <h3>Posts</h3>
+                                                      <h1 class="display-4">
+                                                          <i class="fa fa-pencil"></i>
+                                                          {{ count_posts }}
+                                                      </h1>
+                                                      <a href="/admin/posts" class="btn btn-outline-light btn-sm">View</a>
+                                                  </div>
+                                              </div>
+                              </div>
+                              <div class="col-md-3  ">
+                                              <div class="card text-center bg-warning text-white mb-4">
+                                                      <div class="card-body">
+                                                          <h3>users</h3>
+                                                          <h1 class="display-4">
+                                                              <i class="fa fa-users"></i>
+                                                              {{ count_users}}
+                                                          </h1>
+                                                          <a href="admin/users" class="btn btn-outline-light btn-sm">View</a>
+                                                      </div>
+                                                  </div> 
+                  </div>
+                  <!-- social connect -->
+
+            
+                  <div class="col-md-3 bg-light">
+                       <h1 class="lead text-center">
+                              Social Accounts
+                       </h1>
+      <ul class="list-unstyled text-center">
+            <li><a  href="" class="btn btn-social-icon ">
+                        <span class="fa fa-twitter lead"> Twitter</span>
+                      </a></li>
+                      <li><a href="" class="btn btn-social-icon style=">
+                              <span class="fa fa-facebook lead"> Facebook</span>
+                            </a></li>
+                            <li><a href="" class="btn btn-social-icon ">
+                                    <span class="fa fa-instagram lead"> Instagram</span>
+                                  </a></li>
+                                  <li><a href="" class="btn btn-social-icon ">
+                                          <span class="fa  fa fa-envelope lead"> Gmail</span>
+                                        </a></li>
+<hr> 
+<h1 class="lead text-center">
+            Website Statistics
+     </h1>
+
+                                        <li ><a class="btn btn-light border border-primary text-center" href="https://accounts.google.com/ServiceLogin/signinchooser?elo=1&flowName=GlifWebSignIn&flowEntry=ServiceLogin"><i class="fa fa-calculator"></i>
+                                         Goggle  Analytics</a></li>
+      </ul>
+                  </div>
+      
+                  </div>
+              
+          <section>
+                <div class="row">
+                      <div class="col-md-9 mx-auto">
+
+                      </div>
+                </div>
+          </section>                        
+ 
+
+
+<hr>
+
+
+
+        
+      {% endblock %}

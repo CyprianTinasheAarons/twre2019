@@ -1,0 +1,25 @@
+   
+    {% for i in postsList %}
+    <tr >
+    
+       <td>{{i[0]}}</td> 
+      <td>Author</td>
+        <td>  {{i[1]}}</td>
+         <td>{{i[2]}}</td>
+        <td>             
+       <a 
+       href="{{ url_for('main.edit', id=i[0]) }}">
+       <i  data-toggle="tooltip" data-placement="top" title="Edit" class="fa fa-edit"></i>
+       </a>
+
+        <a 
+       href="{{ url_for('main.delete_post', id=i[0]) }}">
+       <i  data-toggle="tooltip" data-placement="top" title="Delete" class="fa fa-trash">
+       </i>
+       </a>
+   </td>
+
+        </tr>
+
+
+{% endfor %}

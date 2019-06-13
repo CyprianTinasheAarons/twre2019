@@ -1,0 +1,55 @@
+
+{%  extends 'base.html' %}
+{% block content %}
+
+<br>         
+
+
+    <div class="row p-4">
+                
+            <div class="col-md-6  ">
+                    {% include '_property.html' %}
+            </div>
+                 
+            <div class="col-md-6  ">
+                          <!-- Contact Realtor -->
+            <section class="border border-primary p-2 m-2 sticky-top">
+                  
+                    <div >
+                        <h1 class="display-4 text-center" >
+                        Contact Realtor
+                        </h5>
+                        
+                    </div>
+                    <div>
+                        <form  enctype="text/plain" method="get" action="mailto:moneywangu@gmail.com" >
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Email</label>
+                                <input type="email" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Message</label>
+                                <textarea class="form-control"></textarea>
+                            </div>
+                            
+                                <button class="btn btn-primary  ">
+                                    Submit
+                                </button>
+                          
+                        </form>
+                    </div>
+              
+    </section>   
+        
+                </div>
+    </div>
+   
+<h1 class="lead m-2 text-center">
+    <a class="btn btn-light border border-primary" href="/properties"> <i class="fa fa-home"></i>Go To Properties</a>
+</h1>
+    
+{% endblock %}
