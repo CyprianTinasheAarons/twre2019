@@ -6,19 +6,12 @@ from flask_moment import Moment
 from flask_pymongo import pymongo ,MongoClient
 from config import config
 from flask_login import LoginManager,UserMixin
-from flask_uploads import UploadSet, IMAGES ,configure_uploads,patch_request_class
+
 from .models import User
 
 
 client = pymongo.MongoClient("mongodb+srv://twre:qwertyuiop@cluster0-igeuf.mongodb.net/test?retryWrites=true&w=majority")
 mongo= client.twredb
-
-try:
-    print("MongoDB version is %s" %
-            client.server_info()['version'])
-except pymongo.errors.OperationFailure as error:
-    print(error)
-    quit(1)
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
@@ -32,12 +25,10 @@ def load_user(user_id):
     return User(user_json)
 
 
-images = UploadSet('images', IMAGES )
-
 bootstrap = Bootstrap()
 mail = Mail()
 moment = Moment()
-# mongo = PyMongo()
+
 
  
 def create_app(config_name):
@@ -48,13 +39,12 @@ def create_app(config_name):
     app.register_blueprint(main_blueprint)
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
-    configure_uploads(app, images )
-    patch_request_class(app)  # set maximum file size, default is 16MB
+    
     login_manager.init_app(app)
     bootstrap.init_app(app)
     mail.init_app(app)
     moment.init_app(app)
-    # mongo.init_app(app)
+
 
     
     return app

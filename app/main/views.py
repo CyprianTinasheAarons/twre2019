@@ -5,9 +5,10 @@ from flask_pymongo import pymongo ,MongoClient
 from flask_login import login_required
 from .forms import PostForm,PropertyForm,EditProfileForm,CommentForm,EditProfileAdminForm,SearchForm
 from flask_login import current_user
-from app import  images 
 from werkzeug import secure_filename
 from functools import wraps
+from cloudinary.uploader import upload_image
+from cloudinary.utils import cloudinary_url
 
 
 
@@ -15,14 +16,6 @@ from functools import wraps
 # mongodb database connection
 client = pymongo.MongoClient("mongodb+srv://twre:qwertyuiop@cluster0-igeuf.mongodb.net/test?retryWrites=true&w=majority")
 mongo= client.twredb
-
-try:
-    print("MongoDB version is %s" %
-            client.server_info()['version'])
-except pymongo.errors.OperationFailure as error:
-    print(error)
-    quit(1)
-
 
 def admin_required(f):
     @wraps(f)
@@ -220,6 +213,7 @@ def property(id):
         }
     
     return render_template('property.html', estate=estate )
+
 #Administration dashboard of the website
 @main.route('/admin')
 @login_required
@@ -275,10 +269,10 @@ def admin_properties():
         photo_filenames=[]
         photo = request.files['images']
         for photo in form2.images.data:
-            photo_filename = images.save(photo)
-            photo_url = images.url(photo_filename)
+            if photo:
+                photo_upload=upload_image(photo, folder='properties/')
+                photo_url=photo_upload.url
             photo_file = {
-                'name': photo_filename,
                 'photo': photo_url
             }
             photo_filenames.append(photo_file)
@@ -321,9 +315,12 @@ def admin_posts():
         postsList.append([_id ,title , date ])
     form2 = PostForm()
     if form2.validate_on_submit(): 
-        photo_filename =images.save(request.files['image'])
-        photo_url = images.url(photo_filename)
-        mongo.db.Posts.insert({ '_id': getNextSequence(mongo.db.Counters,"postId"),'Title' : request.form['title'], 'Summary' : request.form['summary'] ,'Body': request.form['body'],'Image_url': photo_url,'Image_filename':photo_filename , 'Date': datetime.now()})
+        photo_filename =request.files['image']
+        if photo_filename:
+            photo_upload=upload_image(photo_filename , folder='posts/')
+            photo_url=photo_upload.url
+            
+        mongo.db.Posts.insert({ '_id': getNextSequence(mongo.db.Counters,"postId"),'Title' : request.form['title'], 'Summary' : request.form['summary'] ,'Body': request.form['body'],'Image_url': photo_url , 'Date': datetime.now()})
         return redirect(url_for('.blog'))
     return render_template('admin-posts.html',form1=form1,form2=form2, postsList=postsList  )
 
@@ -335,7 +332,6 @@ def admin_posts():
 def admin_users_s():
     usersList=[]
     form = SearchForm()
-    
     if form.validate_on_submit():
         searchQuery=search( mongo.db.Users, search_text= request.form['search'])
         for i in searchQuery:
@@ -399,14 +395,13 @@ def edit_property (id):
         photo_filenames=[]
         photo = request.files['images']
         for photo in form.images.data:
-            photo_filename = images.save(photo)
-            photo_url = images.url(photo_filename)
+            if photo:
+                photo_upload=upload_image(photo, folder='properties/')
+                photo_url=photo_upload.url
             photo_file = {
-                'name': photo_filename,
                 'photo': photo_url
             }
             photo_filenames.append(photo_file)
-        
         query1 = mongo.db.Users.find({'email': session['email'] },{'username': '1'})
         for i in query1:
             author=i['username']
@@ -444,9 +439,11 @@ def edit(id):
         date = i['Date']
     form = PostForm()
     if form.validate_on_submit():
-        photo_filename =images.save(request.files['image'])
-        photo_url = images.url(photo_filename)
-        mongo.db.Posts.update({'_id':id},{'Title' : request.form['title'], 'Summary' : request.form['summary'], 'Body' : request.form['body'] ,'Image_url': photo_url,'Image_filename':photo_filename, 'Date': date ,'Edit-Date': datetime.now()})
+        photo_filename =request.files['image']
+        if photo_filename:
+            photo_upload=upload_image(photo_filename , folder='posts/')
+            photo_url=photo_upload.url
+        mongo.db.Posts.update({'_id':id},{'Title' : request.form['title'], 'Summary' : request.form['summary'], 'Body' : request.form['body'] ,'Image_url': photo_url, 'Date': date ,'Edit-Date': datetime.now()})
         flash('The post has been updated.')
         return redirect(url_for('main.post', id=id))
     form.title.data = oldTitle

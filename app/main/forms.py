@@ -3,8 +3,7 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField,TextAr
 from wtforms.validators import Required, Length ,Regexp,Email
 from wtforms import ValidationError
 from flask_wtf.file import FileField, FileAllowed, FileRequired 
-from app import images
- 
+
 
 class EditProfileForm(FlaskForm):
     name = StringField('Real name', validators=[Length(0, 64)])
@@ -26,7 +25,7 @@ class EditProfileAdminForm(FlaskForm):
 class PostForm(FlaskForm):
     title =StringField('Post Title', validators=[Required()])
     summary =TextAreaField('Post Summary', validators=[Required()])
-    image = FileField('Post Image', validators=[FileAllowed(images, 'Images only!')])
+    image = FileField('Post Image')
     body =TextAreaField('Post Body', id="editor1", validators=[Required()])
     Submit1 = SubmitField('Post', id="btn")
     
@@ -40,7 +39,7 @@ class PropertyForm(FlaskForm):
     address = StringField('Address', validators=[Length(0, 64)])
     price = IntegerField('Price', validators=[])
     body = TextAreaField('Description' , id="editor1")
-    images = MultipleFileField('Add Images', validators=[ FileAllowed(images, 'Images only!')])
+    images = MultipleFileField('Add Images')
     submit1= SubmitField('Submit' , id="btn")
 
 class SearchForm(FlaskForm):

@@ -15,14 +15,6 @@ from ..models import User
 client = pymongo.MongoClient("mongodb+srv://twre:qwertyuiop@cluster0-igeuf.mongodb.net/test?retryWrites=true&w=majority")
 mongo= client.twredb
 
-try:
-    print("MongoDB version is %s" %
-            client.server_info()['version'])
-except pymongo.errors.OperationFailure as error:
-    print(error)
-    quit(1)
-
-
 
 # Should be hidden 
 salt = b'$2b$07$Kw/qwGlHgmUwSgX4InYrMe'

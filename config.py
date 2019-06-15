@@ -1,9 +1,13 @@
 import os
-# os.system('start mongod')
-from flask_pymongo import pymongo ,MongoClient
-
+import cloudinary 
 
 basedir = os.path.abspath(os.path.dirname(__file__))
+
+cloudinary.config(
+    cloud_name="twre",
+    api_key="299545698238123",
+    api_secret="wVP91fLanBoeP3twmRxJvcAZer0"
+)
 
 class Config:
     APP_NAME = 'App'
@@ -23,35 +27,18 @@ class Config:
     APP_USERS_PER_PAGE=20
     APP_COMMENTS_PER_PAGE = 20
     APP_SLOW_DB_QUERY_TIME = 0.5
-    # Uploads
-    UPLOADS_DEFAULT_DEST ='/static/img/uploads/'
-    UPLOADS_DEFAULT_URL = 'http://www.twre.onrender.com/static/img/uploads/'
-    UPLOADED_IMAGES_DEST = '/static/img/uploads/'
-    UPLOADED_IMAGES_URL = 'http://www.twre.onrender.com/static/img/uploads/'
-   
 
     @staticmethod
     def init_app(app):
         pass
 
-
-
 class DevelopmentConfig(Config):
     DEBUG = True
-    MAIL_SERVER = 'smtp.googlemail.com'
-    MAIL_PORT = 587
-    MAIL_USE_TLS = True
-    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    
-
+   
 class TestingConfig(Config):
-    TESTING = True
-    
+    TESTING = True 
 class ProductionConfig(Config):
     DEBUG = False
-
-
 
 config = {
 'development': DevelopmentConfig,
