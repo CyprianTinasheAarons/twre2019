@@ -2,6 +2,7 @@ import os
 # os.system('start mongod')
 from flask_pymongo import pymongo ,MongoClient
 
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
@@ -23,18 +24,17 @@ class Config:
     APP_COMMENTS_PER_PAGE = 20
     APP_SLOW_DB_QUERY_TIME = 0.5
     # Uploads
-    UPLOADS_DEFAULT_DEST ='D:/KING Downloads/Software Projects/twreapp/app/static/img/uploads/'
-    UPLOADS_DEFAULT_URL = 'http://localhost:5000/static/img/uploads/'
-    UPLOADED_IMAGES_DEST = 'D:/KING Downloads/Software Projects/twreapp/app/static/img/uploads/'
-    UPLOADED_IMAGES_URL = 'http://localhost:5000/static/img/uploads/'
-    # MONGO_URI ='mongodb://localhost:27017/twredb'
-    
-    # MONGO_URI = "mongodb+srv://twredb:<youla2019twre%24>@cluster0-igeuf.mongodb.net/test?retryWrites=true&w=majority"
-    # MONGO_DBNAME ='twredb'
+    UPLOADS_DEFAULT_DEST ='/project/src/app/static/img/uploads/'
+    UPLOADS_DEFAULT_URL = 'http://www.twre.onrender.com/project/src/app/static/img/uploads/'
+    UPLOADED_IMAGES_DEST = '/project/src/app/static/img/uploads/'
+    UPLOADED_IMAGES_URL = 'http://www.twre.onrender.com/project/src/app/static/img/uploads/'
+   
 
     @staticmethod
     def init_app(app):
         pass
+
+
 
 class DevelopmentConfig(Config):
     DEBUG = True

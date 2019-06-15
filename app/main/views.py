@@ -11,6 +11,8 @@ from functools import wraps
 
 
 
+
+# mongodb database connection
 client = pymongo.MongoClient("mongodb+srv://twre:qwertyuiop@cluster0-igeuf.mongodb.net/test?retryWrites=true&w=majority")
 mongo= client.twredb
 
@@ -309,19 +311,16 @@ def admin_posts_search():
 @login_required
 @admin_required
 def admin_posts():
-
     postsList =[]
     form1=SearchForm()
     query = mongo.db.Posts.find({},{"_id": "1" , "Title": "1" , "Date" : "1"})
     for  i in query:
         _id = i['_id']
         title = i['Title']
-    
         date = i['Date']
         postsList.append([_id ,title , date ])
     form2 = PostForm()
     if form2.validate_on_submit(): 
-
         photo_filename =images.save(request.files['image'])
         photo_url = images.url(photo_filename)
         mongo.db.Posts.insert({ '_id': getNextSequence(mongo.db.Counters,"postId"),'Title' : request.form['title'], 'Summary' : request.form['summary'] ,'Body': request.form['body'],'Image_url': photo_url,'Image_filename':photo_filename , 'Date': datetime.now()})
