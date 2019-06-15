@@ -24,10 +24,10 @@ class Config:
     APP_COMMENTS_PER_PAGE = 20
     APP_SLOW_DB_QUERY_TIME = 0.5
     # Uploads
-    UPLOADS_DEFAULT_DEST ='/project/src/app/static/img/uploads/'
-    UPLOADS_DEFAULT_URL = 'http://www.twre.onrender.com/project/src/app/static/img/uploads/'
-    UPLOADED_IMAGES_DEST = '/project/src/app/static/img/uploads/'
-    UPLOADED_IMAGES_URL = 'http://www.twre.onrender.com/project/src/app/static/img/uploads/'
+    UPLOADS_DEFAULT_DEST ='/static/img/uploads/'
+    UPLOADS_DEFAULT_URL = 'http://www.twre.onrender.com/static/img/uploads/'
+    UPLOADED_IMAGES_DEST = '/static/img/uploads/'
+    UPLOADED_IMAGES_URL = 'http://www.twre.onrender.com/static/img/uploads/'
    
 
     @staticmethod
