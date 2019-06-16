@@ -441,7 +441,7 @@ def edit(id):
     if form.validate_on_submit():
         photo_filename =request.files['image']
         if photo_filename:
-            photo_upload=upload_image(photo_filename , folder='posts/')
+            photo_upload=upload_image(photo_filename , folder='postsgit /')
             photo_url=photo_upload.url
         mongo.db.Posts.update({'_id':id},{'Title' : request.form['title'], 'Summary' : request.form['summary'], 'Body' : request.form['body'] ,'Image_url': photo_url, 'Date': date ,'Edit-Date': datetime.now()})
         flash('The post has been updated.')

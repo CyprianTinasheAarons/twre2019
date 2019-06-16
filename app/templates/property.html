@@ -13,29 +13,41 @@
                  
             <div class="col-md-6  ">
                           <!-- Contact Realtor -->
-            <section class="border border-primary p-2 m-2 sticky-top">
-                  
-                    <div >
+            <section class="border border-primary p-2 m-2 sticky-top" style="z-index: inherit;" >
+                 
                         <h1 class="display-4 text-center" >
                         Contact Realtor
                         </h5>
-                        
-                    </div>
+             
                     <div>
-                        <form  enctype="text/plain" method="get" action="mailto:moneywangu@gmail.com" >
+                        <form  enctype="multipart/form-data" method="POST" action="https://mailthis.to/sales@twre.co.zw" >
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="name" placeholder="joe Doe">
                             </div>
                             <div class="form-group">
                                 <label for="name">Email</label>
-                                <input type="email" class="form-control">
+                                <input type="email" class="form-control" name="email" placeholder="joe@email.com">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Subject</label>
+                                <input type="text" class="form-control" name="subject" placeholder="Interested">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Phone Number</label>
+                                <input type="text" class="form-control" name="email" placeholder="+123456789">
                             </div>
                             <div class="form-group">
                                 <label for="name">Message</label>
-                                <textarea class="form-control"></textarea>
+                                <textarea class="form-control"
+                                name="message" placeholder="Hi I Am Interested in the property...."></textarea>
                             </div>
-                            
+                            <div class="form-group">
+                                <label for="name">Attachments</label>
+                                <input type="file" name="file" class="form-control">
+                            </div>
+                        
                                 <button class="btn btn-primary  ">
                                     Submit
                                 </button>
