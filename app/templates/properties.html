@@ -31,11 +31,156 @@
 <script type="text/javascript">
   var ss360Config = {
     siteId: "twre.onrender.com",
+    showErrors: true, // whether to show implementation errors, set to false for production
+    allowCookies: true, // whether to allow the javascript to set cookies
+    suggestions: {
+      show: true,  // whether to show search suggestions
+      maxQuerySuggestions: 3, // the maximum number of query suggestions
+      querySuggestionHeadline: undefined, // the headline of the query suggestions, leave blank if no headline should be shown
+      emptyQuerySuggestions: undefined,
+      showImages: true, // show images in search suggestions
+      num: 6, // the maximum number of search suggestions to be shown
+      minChars: 3, // minimum number of characters before the suggestions shows, default: 3,
+      maxWidth: 'auto', // the maximum width of the suggest box, default: as wide as the input box, at least 275px
+      throttleTime: 300, // the number of milliseconds before the suggest is triggered after finished input, default: 300ms
+      extraHtml: undefined, // extra HTML code that is shown in each search suggest, you can even show values of datapoints here,
+      highlight: true, // whether matched words should be highlighted, default: true
+      viewAllLabel: undefined, // the label of a 'View All' button shown at the end of the suggestion list, default: undefined - no 'View All' button will be adden"x
+      forceBelow: false, // whether to force the suggestions to be shown below the search box (default: false)
+      mobileScrollOnFocus: true // whether to scroll the page in order for the search box to be to the top of the window (on screens below 768 px)
+    },
+    style: {
+      themeColor: '#1C5D7D', // the theme color affecting headlines, buttons, and links
+      suggestions: undefined,
+      defaultCss: true, // whether to include the default CSS,
+      searchBox: undefined,
+      loaderType: 'circle', // can be "cirle" or "square"
+      animationSpeed: 250 // speed of the animations in milliseconds
+    },
     searchBox: {
-      selector: "#searchBox"
+      placeholder: undefined,
+      autofocus: false, // if true, the search box will get focus after initialization
+      selector: '#searchBox', // the selector to the search box,
+      searchButton: undefined, // CSS selector of search buttons
+      focusLayer: false // if true, a layer will be shown when the user focuses on the search input
+    },
+    results: {
+      embedConfig: undefined, // {'url':undefined,'contentBlock':'.page-content-body'}, // if url is given the page will change to that URL and look for the content block there to insert the results
+      fullScreenConfig: undefined, // {trigger: '#ss360-search-trigger', caption: 'Search this site'}, trigger is the CSS selector to the element that starts the search full screen overlay and searchCaption the caption on the full screen search page
+      caption: 'Found #COUNT# search results for \"#QUERY#\"', // the caption of the search results
+      group: true, // whether results should be grouped if content groups are available
+      filters: undefined,
+      num: 96, // the maximum number of search results to be shown
+      highlightQueryTerms: true, // whether to highlight the query terms in search results
+      moreResultsButton: "Show more results", // HTML for the more results button, all results will be shown if this is null
+      noResultsText: 'Sorry, we have not found any matches for your query.', // the text to show when there are no results
+      queryCorrectionText: 'Did you mean "#CORRECTION#"?',
+      searchQueryParamName: 'ss360Query', // the name of the search query parameter
+      linksOpenNewTab: false, // should clicking on the result links open a new tab/window?
+      showSearchBoxLayover: true, //whether to show search box in search result layover
+      moreResultsPagingSize: 12, // the number of new results to show each time the more results button is pressed (max: 24)
+      orderByRelevanceText: "Relevance" // the text to be shown in order select box to describe 'order by relevance' option
+    },
+    contentGroups: {
+      include: undefined, // json array of content group names to be included in the search result, the content group names are case-sensitive, e.g. ["Products"]
+      exclude: undefined, // json array of content group names to be excluded from the search result, the content group names are case-sensitive, e.g. ["Blog"]
+      otherName: '', // the name of the results not in any other content group
+      ignoreOther: false // whether or not to ignore the "other" content group
+    },
+    tracking: {
+      providers: [], // how to track, supported values: 'GA' (Google Analytics), 'GTM' (Google Tag Manager)
+      searchCallback: undefined, // callback before SERP is reported, SERP events aren't reported if this returns false, you'll get the query as the parameter for the callback
+      enhanced: true  // whether to use the SS360 enhanced, session based tracking to track all search events
+    },
+    callbacks: {
+      suggestChange: undefined, // callback triggered after suggestion set is changed, takes boolean indicating whether suggestions are visible as argument
+      redirect: undefined, // callback to handle search redirects, takes redirect url as parameter, window.location.href is changed by default
+      preSearch: undefined, // a callback that is triggered before the search is executed, e.g. to catch empty queries
+      postSearch: undefined, // a callback that is triggered after the search results have been populated
+      preSuggest: undefined, // a callback that is triggered before the search suggest is executed, takes the query and search box reference as arguments
+      searchResult: undefined, // a callback that is triggered after the search is executed, e.g. to build your own result page from the response
+      enter: SS360.showResults, // callback on what should happen when enter is pressed and focus is in input field
+      enterResult: SS360.followLink, // callback on what should happen when enter is pressed when a link is selected, default: undefined, meaning the link will be followed
+      type: SS360.recordTyping,
+      blur: SS360.blur,
+      focus: SS360.focus,
+      closeLayer: undefined,
+      init: undefined // function to call after initialization is complete
+    },
+    accessibility: {
+      isMainContent: false, // whether to mark ss360 layer as main content of the page
+      resultTopHeadingLevel: 2, // heading level to start with in search result (default h2)
+      suggestHeadingLevel: 2, // heading level to use in search suggestions, for content group heading
+      searchFieldLabel: 'Search', // invisible label to be used with screen readers when search field is focused, will only be used if value is not empty and there is no label element associated to the search field,default: 'Search'
+      srSuggestionsHiddenText: 'Search suggestions are hidden', // text to announce @screen reader after search suggestions have been hidden
+      srNoSuggestionsText: 'No search suggestions', // text to announce @screen reader if no suggestions are available
+      srSuggestionsCountText: '#COUNT# search suggestions shown', // text to announce @screen reader after search suggestions have been shown, #COUNT# will be replaced with the suggestion count
+      srOneSuggestionText: 'One search suggestion shown',// text to announce @screen reader after search suggestions have been shown
+      srSuggestBoxControlDescription: 'Use up and down arrows to select available result. Press enter to go to selected search result. Touch devices users can use touch and swipe gestures.' // text to announce @screen reader after search input is focused - describes keyboard controls
+    },
+    specialMobileSuggest: {
+      enabled: false, // whether to show special mobile suggests, default: false
+      breakpoint: 768, // css breakpoint to show mobile suggests (max-width: breakpoint)
+      placeholder: '', // placeholder for empty suggestions
+      searchBoxPlaceholder: '', // the special search box placeholder
+      customTopHtml: '', // additional html/text content to be shown above special mobile search field
+      animateTransitions: true, // whether to animate special mobile transitions
+      resizeSearchBoxOnScroll: true // whether to resize search field when user scrolls special mobile suggests
+    },
+    smart404: {
+      identifier: 'Page not found', // the string in the title that identifies the page as a 404 page
+      resultSelector: '#ss360-404', // a CSS selector that points to the area in which the alternative links should be shown
+      caption: 'Try going here instead:' // caption for 404 results
+    },
+    layout: {
+      mobile: { // below 992px
+        type: 'list', // can be either "grid" or "list", default: "list"
+        showImages: true, // whether to show images in search result, default: true
+        showSnippet: true, // whether to show text snippet in search result, default: true
+        showTitle: true, // whether to show title in search result, default: true
+        showDataPoints: true, // whether to show data points in search result, default: true
+        showUrl: false, // whether to show link in search result, default: false
+        gridColsMd: 2, // grid layout column count for devices between 768px and 991px, default: 2
+        gridColsSm: 1 // grid layout column count for devices below 768px, default: 1
+      },
+      desktop: { // 992 px and larger
+        type: 'list', // can be either "grid" or "list", default: "list"
+        showImages: true, // whether to show images in search result, default: true
+        showSnippet: true, // whether to show text snippet in search result, default: true
+        showTitle: true, // whether to show title in search result, default: true
+        showDataPoints: true, // whether to show data points in search result, default: true
+        showUrl: false, // whether to show link in search result, default: false
+        gridColsXl: 4, // grid layout column count for devices larger than 1200px, default: 4
+        gridColsLg: 3 // grid layout column count for devices between 992px and 1199px, default: 3
+      },
+      navigation: {
+        position: 'none',  // navigation "top", "left", or "none"
+        type: 'scroll', // the navigation layout 'scroll' or 'tabs', for more then 6 (position: 'top') or 10 (position: 'left') content groups the 'scroll' navigation will be used
+        tabSpacingPx: 5, // spacing between tabs
+        borderRadiusPx: 3, // tab border radius
+        tabTitle: 'Found #COUNT# #NAME# for \'#QUERY#\'', // e.g. 'Found 43 Recipes for "curry"'
+        showGroupResultCount: true, // whether to show the count of results in specific content group in the navigation
+        forceTabs: true, // whether to force tabs to be shown (even for high content group count or a single content group), applied to desktop only
+        fallbackToScroll: false // whether to use scroll navigation instead of tabs on desktop devices (992px and more) when more than 5 (top navigation) or 10 (left navigation) content groups are shown
+      }
+    },
+    voiceSearch: {
+      enabled: false, // whether to enable voice search for supported browsers (an microphone icon will be added to your search field if Speech Recognition API is supported)
+      lang: 'en-US' // the input language (BCP 47 language tag)
+    },
+    filters: {
+      enabled: false, // whether to generate and show filter options, default: false
+      position: "left", // where to place the filter view, one of the following: "top", "left"; "top" - filters will be shown above the search results, "left" - filters will be shown to the left of search results + "show filter" button will be added for mobile devices; default: "left" for embeded or fullscreen search results, "top" otherwise
+      label: "Filter", // the label of the filter column, will be also used as screen reader text
+      showCounts: true, // whether to show result counts for multiple choice filters
+      showQuickDelete: true, // whether to show a "Quick Delete" bar summarizing active filter options and providing a "delete all" option
+      deleteAllLabel: "Clear All", // the label of the "delete all" option
+      settings: {} // range filter settings, e.g. {Price: {unit: '$', step: 1, drawHistogram: false}}
     }
-  }
+  };
 </script>
+<script type="module" src="https://cdn.sitesearch360.com/sitesearch360-v12.mjs"></script>
+<script nomodule src="https://cdn.sitesearch360.com/sitesearch360-v12.min.js" async></script>
 
 {% endblock %}
  
