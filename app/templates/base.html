@@ -11,6 +11,9 @@
      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
       <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
       <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/ekko-lightbox.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/Rent_25px.png') }}">
+    {{ moment.include_jquery() }}
+    {{ moment.include_moment() }}
    {% block title %} <title>TWRE</title> {% endblock %}
 
     {% endblock %}
@@ -152,11 +155,11 @@
                  
       
                                     <li> <div class="d-flex flex-row justify-content-center">
-                                        <div class="p-2"><a href=""><i class="fa fa-facebook"></i></a></div>
-                                        <div class="p-2"><a href=""><i class="fa fa-twitter"></i></a></div>
-                                        <div class="p-2"><a href=""><i class="fa fa-instagram"></i></a></div>
-                                        <div class="p-2"><a href=""><i class="fa fa-whatsapp"></i></a></div>
-                                        <div class="p-2"><a href=""><i class="fa fa-envelope-o"></i></a></div>
+                                        <div class="p-2"><a href="https://www.facebook.com/twre.zim.7"><i class="fa fa-facebook"></i></a></div>
+                                        <div class="p-2"><a href="https://www.twitter.com/twrezim"><i class="fa fa-twitter"></i></a></div>
+                                        <div class="p-2"><a href="https://www.instagram.com/twrezim"><i class="fa fa-instagram"></i></a></div>
+                                        <div class="p-2"><a href="https://api.whatsapp.com/send?phone=263777918118" ><i class="fa fa-whatsapp"></i></a></div>
+                                        <div class="p-2"><a href="mailto:twre@twre.co.zw"><i class="fa fa-envelope-o"></i></a></div>
                                     </div></li>
         </ul>
                     </div>
@@ -220,6 +223,8 @@
                     </div>
                     <div class="p-4 align-self-end lead">
                             <a href="mailto:sales@twre.co.zw" class="text-muted"><strong>Email: </strong>Sales@twre.co.zw</a>
+                            <a href="mailto:sales@twre.co.zw" class="text-muted">/Letting@twre.co.zw</a>
+
                     </div>
                 </div>
                 <div class="d-flex flex-row">
@@ -227,8 +232,10 @@
                             <i class="fa fa-whatsapp"></i>
                         </div>
                         <div class="p-4 align-self-end lead">
-                                <a href="tel:+263777918118" class="text-muted"><strong>Whatsapp: </strong>0777918118
+                                <a href="https://api.whatsapp.com/send?phone=263777918118" class="text-muted"><strong>Whatsapp:</strong>Sales/0777918118
                                     <i><img  src="{{ url_for ('static' , filename='img/WhatsApp_30px.png')}}"  ></i></a>
+                                    <a href="https://api.whatsapp.com/send?phone=263772395362" class="text-muted">Letting/0772395362
+                                        <i><img src="{{ url_for ('static' , filename='img/WhatsApp_30px.png')}}"></i></a>
                         </div>
                     </div>
             </div>

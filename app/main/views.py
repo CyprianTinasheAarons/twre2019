@@ -193,8 +193,8 @@ def post(id):
         'image' :i['Image_url'],
         'date':i['Date']
         }
-    form = CommentForm()
-    return render_template('post.html', post=post , form=form)
+   
+    return render_template('post.html', post=post)
 
 @main.route('/property/<int:id>', methods=['GET', 'POST'])
 def property(id):
