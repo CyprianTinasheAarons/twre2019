@@ -1,6 +1,7 @@
 import os
 import cloudinary 
 
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 cloudinary.config(
@@ -27,7 +28,7 @@ class Config:
     APP_USERS_PER_PAGE=20
     APP_COMMENTS_PER_PAGE = 20
     APP_SLOW_DB_QUERY_TIME = 0.5
-
+    
     @staticmethod
     def init_app(app):
         pass

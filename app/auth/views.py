@@ -10,6 +10,7 @@ from datetime import datetime
 from ..email import send_email
 from flask_login import current_user
 from ..models import User
+from app import cache
 
 
 client = pymongo.MongoClient("mongodb+srv://twre:qwertyuiop@cluster0-igeuf.mongodb.net/test?retryWrites=true&w=majority")
@@ -23,6 +24,7 @@ def getNextSequence(collection,name):
      return collection.find_and_modify(query= { '_id': name },update= { '$inc': {'seq': 1}}, new=True ).get('seq')
 
 @auth.route('/auth/login' , methods =['GET', 'POST'])
+@cache.cached(timeout=300, key_prefix="login")
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -57,6 +59,7 @@ def logout():
     return redirect(url_for('auth.login'))
 
 @auth.route('/auth/signup', methods=['GET', 'POST'])
+@cache.cached(timeout=300, key_prefix="signup")
 def signup():
     form = SignupForm()
     if form.validate_on_submit():
@@ -67,9 +70,7 @@ def signup():
         if existing_user is None:
             hashpass = bcrypt.hashpw((request.form['password']).encode('utf-8'), salt)
             users.insert({'_id': getNextSequence(mongo.db.Counters,"userId"),'username' : request.form['username'], 'email' : request.form['email'] ,'password': hashpass, 'name': '' , 'location': '', 'about_me': '' ,'role':'user', 'Date': datetime.now()})
-           
-
-
+        
         flash('You can now login.')
         return redirect(url_for('auth.login'))
     return render_template('auth/signup.html' , form=form)

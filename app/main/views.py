@@ -9,9 +9,7 @@ from werkzeug import secure_filename
 from functools import wraps
 from cloudinary.uploader import upload_image
 from cloudinary.utils import cloudinary_url
-
-
-
+from app import cache
 
 # mongodb database connection
 client = pymongo.MongoClient("mongodb+srv://twre:qwertyuiop@cluster0-igeuf.mongodb.net/test?retryWrites=true&w=majority")
@@ -42,12 +40,10 @@ def delete(collection,uniqueid):
 #Main pages of twre site
 @main.route('/', methods=['GET','POST'])
 @main.route('/home', methods=['GET','POST'])
+@cache.cached(timeout=300, key_prefix="home")
 def home():
     estates =[]
-    
     query = mongo.db.Estates.find({}, {"_id":"1" ,"Title":"1", "Category":"1","Price":"1" ,"Address":"1" ,"Photos": "1"  }).limit(8).sort("_id" ,-1)
-    
- 
     for i in query:
         _id =i['_id']
         title = i['Title']
@@ -56,17 +52,14 @@ def home():
         address = i['Address']
         image = i['Photos']
         estates.append([ _id,title, category , price , address , image])
-
     return render_template('home.html', estates=estates )
  
 @main.route('/properties',  methods=['GET','POST'])
+@cache.cached(timeout=300, key_prefix="properties")
 def properties():
     estatesDB=mongo.db.Estates
     estates =[]
-   
-
     query=estatesDB.find({},{"_id":"1" ,"Title":"1", "Category":"1","Price":"1" ,"Address":"1" ,"Photos": "1"  }).sort("_id" ,-1)
-
     for i in query:
         _id = i['_id']
         title = i['Title']
@@ -75,14 +68,11 @@ def properties():
         address = i['Address']
         photos = i['Photos']
         estates.append([ _id,title, category , price , address , photos])
-
-    form = SearchForm()
-   
-
-     
+    form = SearchForm()     
     return render_template('properties.html', estates=estates , form=form  )
 
 @main.route('/properties/search',  methods=['GET','POST'])
+@cache.cached(timeout=300, key_prefix="properties_search")
 def properties_search():
     estatesSearch=[]
     form = SearchForm()
@@ -100,6 +90,7 @@ def properties_search():
     return render_template('properties.html', form=form , estatesSearch=estatesSearch )
     
 @main.route('/blog',methods=['GET','POST'])
+@cache.cached(timeout=300, key_prefix="blog")
 def blog():
     posts = []
     postsSearch=[]
@@ -118,7 +109,9 @@ def blog():
 
 
 @main.route('/blog/search' ,methods=['GET','POST'])
+@cache.cached(timeout=300, key_prefix="blog_search")
 def blog_search():
+    
     postsSearch=[]
     form = SearchForm()
     if form.validate_on_submit():
@@ -134,10 +127,12 @@ def blog_search():
     return render_template('blog.html' ,postsSearch=postsSearch , form=form )
 
 @main.route('/about')
+@cache.cached(timeout=300, key_prefix="about")
 def about():
     return render_template('about.html')
 
 @main.route('/user')
+@cache.cached(timeout=300, key_prefix="user")
 def user():
     query = mongo.db.Users.find({'email' : session['email'] },{'username': '1', 'email': '1', 'name': '1','location': '1','about_me' : '1'})
     user ={}
@@ -218,6 +213,7 @@ def property(id):
 @main.route('/admin')
 @login_required
 @admin_required
+@cache.cached(timeout=300, key_prefix="admin")
 def admin(): 
     count_posts = mongo.db.Posts.count()
     count_estates = mongo.db.Estates.count()
@@ -248,6 +244,7 @@ def admin_properties_search():
 @main.route('/admin/properties' ,methods=['GET' , 'POST'])
 @login_required
 @admin_required
+@cache.cached(timeout=300, key_prefix="admin_properties")
 def admin_properties():
     propertyList =[]
     form1 =SearchForm()
@@ -262,7 +259,6 @@ def admin_properties():
             date = i['Date']
             propertyList.append([_id,title, category ,address , price , date,authorName])
 
-    
     form2 = PropertyForm()
     if form2.validate_on_submit():
         photo_file = {}
@@ -288,6 +284,7 @@ def admin_properties():
 @main.route('/admin/posts/search' ,methods=['GET' , 'POST'])
 @login_required
 @admin_required
+@cache.cached(timeout=300, key_prefix="admin_posts_search")
 def admin_posts_search():
     postsList =[]
     form1=SearchForm()
@@ -304,6 +301,7 @@ def admin_posts_search():
 @main.route('/admin/posts' ,methods=['GET' , 'POST'])
 @login_required
 @admin_required
+@cache.cached(timeout=300, key_prefix="admin_posts")
 def admin_posts():
     postsList =[]
     form1=SearchForm()
@@ -346,6 +344,7 @@ def admin_users_s():
 @main.route('/admin/users' , methods=['GET', 'POST'])
 @login_required
 @admin_required
+@cache.cached(timeout=300, key_prefix="admin_users")
 def admin_users():
     usersList=[]
     form = SearchForm()

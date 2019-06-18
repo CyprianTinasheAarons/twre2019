@@ -6,9 +6,8 @@ from flask_moment import Moment
 from flask_pymongo import pymongo ,MongoClient
 from config import config
 from flask_login import LoginManager,UserMixin
-
+from flask_caching import Cache
 from .models import User
-
 
 client = pymongo.MongoClient("mongodb+srv://twre:qwertyuiop@cluster0-igeuf.mongodb.net/test?retryWrites=true&w=majority")
 mongo= client.twredb
@@ -24,13 +23,11 @@ def load_user(user_id):
     user_json = users.find_one({'_id': 'Int32(user_id)' })
     return User(user_json)
 
-
 bootstrap = Bootstrap()
 mail = Mail()
 moment = Moment()
+cache = Cache(config={'CACHE_TYPE': 'simple'})
 
-
- 
 def create_app(config_name):
     app = Flask(__name__)
     app.config.from_object(config['default'])
@@ -43,7 +40,6 @@ def create_app(config_name):
     bootstrap.init_app(app)
     mail.init_app(app)
     moment.init_app(app)
+    cache.init_app(app)
 
-
-    
     return app

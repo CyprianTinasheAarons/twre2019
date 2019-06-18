@@ -14,18 +14,6 @@ body {
 .carousel-item {
   height: 450px; }
 
-.carousel-image-1 {
-  background: url("../img/img1.jpg");
-  background-size: cover; }
-
-.carousel-image-2 {
-  background: url("../img/img2.jpg");
-  background-size: cover; }
-
-.carousel-image-3 {
-  background: url("../img/img3.jpg");
-  background-size: cover; }
-
 #property .card:hover {
   color: #880e4f; }
 
