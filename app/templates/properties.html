@@ -12,18 +12,27 @@
    </h1>
 
    <!-- SEARCH -->
-<section >
+<div id="properties">
         <div class="col-md-4 mx-auto " >
-          {{ wtf.quick_form(form ,action='/properties/search' )}}
+          <input class="search" placeholder="Search" />
+          <button class="sort" data-sort="name">
+            Sort by title
+          </button>
+          <button class="sort" data-sort="price">
+            Sort by price
+          </button>
+          <button class="sort" data-sort="address">
+            Sort by address
+          </button>
         </div>
        
- 
- </section>
-<br>
-<div class="row p-4" id="easyPaginate">
-  {% include '_propertiesSearch.html' %}
-  {% include '_properties.html' %}
-  </div>
+<!-- <div class="row p-4" id="easyPaginate"> -->
+  <ul class="list">
+      {% include '_properties.html' %}
+  </ul>
+  <!-- </div> -->
+  
+</div>
 </div>
 
 {% endblock %}

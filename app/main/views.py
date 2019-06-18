@@ -9,7 +9,7 @@ from werkzeug import secure_filename
 from functools import wraps
 from cloudinary.uploader import upload_image
 from cloudinary.utils import cloudinary_url
-from app import cache
+from app import cache 
 
 # mongodb database connection
 client = pymongo.MongoClient("mongodb+srv://twre:qwertyuiop@cluster0-igeuf.mongodb.net/test?retryWrites=true&w=majority")
@@ -71,23 +71,23 @@ def properties():
     form = SearchForm()     
     return render_template('properties.html', estates=estates , form=form  )
 
-@main.route('/properties/search',  methods=['GET','POST'])
-@cache.cached(timeout=300, key_prefix="properties_search")
-def properties_search():
-    estatesSearch=[]
-    form = SearchForm()
-    if form.validate_on_submit():
-        searchQuery=search( mongo.db.Estates, search_text = request.form['search'])
-        for i in searchQuery:
-            _id =i['_id']
-            title = i['Title']
-            category = i['Category'] 
-            price = i['Price']
-            address = i['Address']
-            image = i['Photos']
-            estatesSearch.append([ _id,title, category , price , address , image])
+# @main.route('/properties/search',  methods=['GET','POST'])
+# @cache.cached(timeout=300, key_prefix="properties_search")
+# def properties_search():
+#     estatesSearch=[]
+#     form = SearchForm()
+#     if form.validate_on_submit():
+#         searchQuery=search( mongo.db.Estates, search_text = request.form['search'])
+#         for i in searchQuery:
+#             _id =i['_id']
+#             title = i['Title']
+#             category = i['Category'] 
+#             price = i['Price']
+#             address = i['Address']
+#             image = i['Photos']
+#             estatesSearch.append([ _id,title, category , price , address , image])
    
-    return render_template('properties.html', form=form , estatesSearch=estatesSearch )
+#     return render_template('properties.html', form=form , estatesSearch=estatesSearch )
     
 @main.route('/blog',methods=['GET','POST'])
 @cache.cached(timeout=300, key_prefix="blog")
@@ -213,7 +213,6 @@ def property(id):
 @main.route('/admin')
 @login_required
 @admin_required
-@cache.cached(timeout=300, key_prefix="admin")
 def admin(): 
     count_posts = mongo.db.Posts.count()
     count_estates = mongo.db.Estates.count()
@@ -244,7 +243,6 @@ def admin_properties_search():
 @main.route('/admin/properties' ,methods=['GET' , 'POST'])
 @login_required
 @admin_required
-@cache.cached(timeout=300, key_prefix="admin_properties")
 def admin_properties():
     propertyList =[]
     form1 =SearchForm()
@@ -284,7 +282,6 @@ def admin_properties():
 @main.route('/admin/posts/search' ,methods=['GET' , 'POST'])
 @login_required
 @admin_required
-@cache.cached(timeout=300, key_prefix="admin_posts_search")
 def admin_posts_search():
     postsList =[]
     form1=SearchForm()
@@ -301,7 +298,6 @@ def admin_posts_search():
 @main.route('/admin/posts' ,methods=['GET' , 'POST'])
 @login_required
 @admin_required
-@cache.cached(timeout=300, key_prefix="admin_posts")
 def admin_posts():
     postsList =[]
     form1=SearchForm()
@@ -344,7 +340,6 @@ def admin_users_s():
 @main.route('/admin/users' , methods=['GET', 'POST'])
 @login_required
 @admin_required
-@cache.cached(timeout=300, key_prefix="admin_users")
 def admin_users():
     usersList=[]
     form = SearchForm()
