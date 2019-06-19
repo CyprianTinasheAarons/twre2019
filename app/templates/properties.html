@@ -13,45 +13,50 @@
 
    <!-- SEARCH -->
 <div id="properties">
-        <div class="col-md-4 mx-auto " >
-          <input class="search" placeholder="Search" />
-          <button class="sort" data-sort="title">
-            Sort by title
-          </button>
-          <button class="sort" data-sort="price">
-            Sort by price
-          </button>
-          <button class="sort" data-sort="address">
-            Sort by address
-          </button>
-           <button class="sort" data-sort="address">
-            Sort by address
-          </button>
-
-          <div class="filter-group row">
-          <div class="form-group col-xs-12 col-sm-12 col-md-4">
-            <div class="radio-inline">
-              <label>
-                <input class="filter" type="radio" value="Harare" name="address" id="address"/> Harare
-              </label>
-            </div>
-            <div class="radio-inline">
-              <label>
-                <input class="filter" type="radio" value="Rd" name="address" id="address"/> Road
-              </label>
-            </div>
-            <div class="radio-inline">
-              <label>
-                <input class="filter" type="radio" value="Ave" name="address" id="address"/> Avenue
-              </label>
-            </div>
-          </div>
-          </div>
-
-
+        <div class="col-md-4 col-sm-12 mx-auto " >
           
-          <div class="form-group col-xs-12 col-sm-12">
-            <button class="btn btn-danger" onclick="resetList();">Clear</button>
+          <!-- Actual search box -->
+          <div class="form-group">
+            <input type="text" class="form-control fa fa-search  search" placeholder="Search">
+          </div>
+         <p><small><small>
+            Sort by:
+         </small></small>
+          <button class="sort btn btn-light  text-muted" data-sort="title">
+            title
+          </button>
+          <button class="sort btn btn-light  text-muted" data-sort="price">
+            price
+          </button>
+          <button class="sort btn btn-light text-muted" data-sort="category">
+            category
+          </button>
+           <button class="sort btn btn-light text-muted" data-sort="address">
+            address
+          </button> </p>
+
+          <div class="filter-group ">
+          <div class="form-group   mx-auto">
+             <p class="text-primary"><small>
+                      Filters:
+             </small></p>
+            <div class="radio-inline">
+              <label class="text-muted">
+                <input class="filter " type="radio" value="Harare" name="address" id="address"/> 
+                <small>Harare</small>
+              </label>
+           
+              <label class="text-muted">
+                <input class="filter " type="radio" value="Rd" name="address" id="address"/> <small>Road</small>
+              </label>
+            
+              <label class="text-muted">
+                <input class="filter" type="radio" value="Ave" name="address" id="address"/><small>Avenuegit </small> 
+              </label>
+            </div>
+           
+              <button class="btn btn-primary" onclick="resetList();">Clear</button>
+          </div>
           </div>
 
         </div>
@@ -61,7 +66,17 @@
       {% include '_properties.html' %}
   </div>
       
-      <ul class="pagination"></ul>
+      <div class="row">
+        <div class="col-md- col-sm- mx-auto">
+          <p class="lead text-muted text-center">
+            Pages:</p>
+            <ul class="pagination text-center"></ul>
+          
+        
+
+        </div>
+      </div>
+     
   
 </div>
 </div>
