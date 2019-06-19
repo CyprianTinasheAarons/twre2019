@@ -16,19 +16,19 @@
 <td> {{i[6]}}</td>
 <td>{{i[5]}}</td>
 <td>
-               
+        <p>   
        <a 
        href="{{ url_for('main.edit_property', id=i[0]) }}">
        <i  data-toggle="tooltip" data-placement="top" title="Edit"
        class="fa fa-edit"></i>
        </a>
-          
+        ----
        <a 
        href="{{ url_for('main.delete_property', id=i[0]) }}">
        <i  data-toggle="tooltip" data-placement="top" title="Delete" class="fa fa-trash">
        </i>
        </a>
-       
+      </p>
    
 </td>
 

@@ -71,23 +71,6 @@ def properties():
     form = SearchForm()     
     return render_template('properties.html', estates=estates , form=form  )
 
-# @main.route('/properties/search',  methods=['GET','POST'])
-# @cache.cached(timeout=300, key_prefix="properties_search")
-# def properties_search():
-#     estatesSearch=[]
-#     form = SearchForm()
-#     if form.validate_on_submit():
-#         searchQuery=search( mongo.db.Estates, search_text = request.form['search'])
-#         for i in searchQuery:
-#             _id =i['_id']
-#             title = i['Title']
-#             category = i['Category'] 
-#             price = i['Price']
-#             address = i['Address']
-#             image = i['Photos']
-#             estatesSearch.append([ _id,title, category , price , address , image])
-   
-#     return render_template('properties.html', form=form , estatesSearch=estatesSearch )
     
 @main.route('/blog',methods=['GET','POST'])
 @cache.cached(timeout=300, key_prefix="blog")
@@ -372,7 +355,7 @@ def delete_user (id):
 @login_required
 @admin_required
 def edit_property (id):
-    query = mongo.db.Estates.find({'_id' : id }, {"Author" : "1", "Title":"1", "Category":"1","Price":"1" ,"Address":"1", "Body" :"1" ,"Date": "1"})
+    query = mongo.db.Estates.find({'_id' : id }, {"Author" : "1", "Title":"1", "Category":"1","Price":"1" ,"Address":"1", "Body" :"1", "Photos": "1" ,"Date": "1"})
 
     for i in query:
         oldAuthor = i['Author']
@@ -381,26 +364,27 @@ def edit_property (id):
         oldPrice = i['Price']
         oldAddress = i['Address']
         oldBody = i['Body']
+        oldPhotos =i['Photos']
         date = i['Date']
 
     form = PropertyForm()
     if form.validate_on_submit():
-        photo_file = {}
-        photo_filenames=[]
-        photo = request.files['images']
-        for photo in form.images.data:
-            if photo:
-                photo_upload=upload_image(photo, folder='properties/')
-                photo_url=photo_upload.url
-            photo_file = {
-                'photo': photo_url
-            }
-            photo_filenames.append(photo_file)
+        # photo_file = {}
+        # photo_filenames=[]
+        # photo = request.files['images']
+        # for photo in form.images.data:
+        #     if photo:
+        #         photo_upload=upload_image(photo, folder='properties/')
+        #         photo_url=photo_upload.url
+        #     photo_file = {
+        #         'photo': photo_url
+        #     }
+        #     photo_filenames.append(photo_file)
         query1 = mongo.db.Users.find({'email': session['email'] },{'username': '1'})
         for i in query1:
             author=i['username']
 
-        mongo.db.Estates.update({'_id': id},{'Author': author,'Title': request.form['title']  , 'Category' : request.form['category'], 'Address' : request.form['address'] ,'Price': request.form['price'], 'Body' : request.form['body'], 'Photos': photo_filenames ,'Date' : date, 'Edit-Date': datetime.now() })
+        mongo.db.Estates.update({'_id': id},{'Author': author,'Title': request.form['title']  , 'Category' : request.form['category'], 'Address' : request.form['address'] ,'Price': request.form['price'], 'Body' : request.form['body'], 'Photos': oldPhotos ,'Date' : date, 'Edit-Date': datetime.now() })
         flash('The property has been updated.')
         return redirect(url_for('main.property' , id= id))
     form.title.data = oldTitle
