@@ -7,7 +7,7 @@
 {% block content %}
 <div class="p-4">
   <br>
-<h1 class="display-4 text-center p-4 ">
+<h1 class="display-4 text-center p-4 text-responsive ">
         Properties   
    </h1>
 
@@ -15,7 +15,7 @@
 <div id="properties">
         <div class="col-md-4 mx-auto " >
           <input class="search" placeholder="Search" />
-          <button class="sort" data-sort="name">
+          <button class="sort" data-sort="title">
             Sort by title
           </button>
           <button class="sort" data-sort="price">
@@ -24,13 +24,44 @@
           <button class="sort" data-sort="address">
             Sort by address
           </button>
+           <button class="sort" data-sort="address">
+            Sort by address
+          </button>
+
+          <div class="filter-group row">
+          <div class="form-group col-xs-12 col-sm-12 col-md-4">
+            <div class="radio-inline">
+              <label>
+                <input class="filter" type="radio" value="Harare" name="address" id="address"/> Harare
+              </label>
+            </div>
+            <div class="radio-inline">
+              <label>
+                <input class="filter" type="radio" value="Rd" name="address" id="address"/> Road
+              </label>
+            </div>
+            <div class="radio-inline">
+              <label>
+                <input class="filter" type="radio" value="Ave" name="address" id="address"/> Avenue
+              </label>
+            </div>
+          </div>
+          </div>
+
+
+          
+          <div class="form-group col-xs-12 col-sm-12">
+            <button class="btn btn-danger" onclick="resetList();">Clear</button>
+          </div>
+
         </div>
        
-<!-- <div class="row p-4" id="easyPaginate"> -->
-  <ul class="list">
+
+  <div class="list row" >
       {% include '_properties.html' %}
-  </ul>
-  <!-- </div> -->
+  </div>
+      
+      <ul class="pagination"></ul>
   
 </div>
 </div>

@@ -3,8 +3,7 @@
 
   {% for i in estates %}
          
- <li>
-    <div class="col-md-3 my-1">
+ <div class=" col-md-3 my-2 ">
        <a href="{{ url_for('.property' , id=i[0] ) }}" style="text-decoration: none;" >
          <div class="card border border-white">
           
@@ -12,10 +11,11 @@
          
           <div class="card-body">
            
-            <h3 class="text-dark title ">{{i[1]}}</h3>
-           <h1 class="lead price">
-             {{i[2]}} | ${{i[3]}}
-         </h1>
+            <h3 class="text-dark title">{{i[1]}}</h3>
+           <h3 class="lead category">
+             {{i[2]}} </h3>
+             <h3 class="lead price">${{i[3]}}
+         </h3>
          
             <p class="lead address " data-toggle="tooltip" data-placement="top" title="Click For Map"> <a href="http://maps.google.com/?q={{i[4]}}" style="text-decoration: none;">
                 {{i[4]}}
@@ -23,9 +23,9 @@
 
     </div>
   </div>
-      </a>
-    </div>
-  </li>
+</a>
+    
+</div>
  
       {% endfor %}
 

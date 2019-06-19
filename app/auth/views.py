@@ -10,14 +10,10 @@ from datetime import datetime
 from ..email import send_email
 from flask_login import current_user
 from ..models import User
-from app import cache
-
 
 client = pymongo.MongoClient("mongodb+srv://twre:qwertyuiop@cluster0-igeuf.mongodb.net/test?retryWrites=true&w=majority")
 mongo= client.twredb
-
-
-# Should be hidden 
+ 
 salt = b'$2b$07$Kw/qwGlHgmUwSgX4InYrMe'
 
 def getNextSequence(collection,name):
@@ -28,7 +24,6 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         users = mongo.db.Users
-        
         loginuser_json = users.find_one({'email' : request.form['email']})
         query= users.find({'email': request.form['email']},{'role':'1'})
         for i in query:
@@ -44,7 +39,6 @@ def login():
                 else:
                     return redirect(url_for('main.home'))
         flash('Invalid username or password?')
-
     return render_template('auth/login.html', form=form)
 
 
@@ -61,14 +55,11 @@ def logout():
 def signup():
     form = SignupForm()
     if form.validate_on_submit():
-        
         users  = mongo.db.Users
         existing_user = users.find_one({'username': request.form[ 'username'] })
-
         if existing_user is None:
             hashpass = bcrypt.hashpw((request.form['password']).encode('utf-8'), salt)
             users.insert({'_id': getNextSequence(mongo.db.Counters,"userId"),'username' : request.form['username'], 'email' : request.form['email'] ,'password': hashpass, 'name': '' , 'location': '', 'about_me': '' ,'role':'user', 'Date': datetime.now()})
-        
         flash('You can now login.')
         return redirect(url_for('auth.login'))
     return render_template('auth/signup.html' , form=form)
