@@ -14,10 +14,10 @@
    <!-- SEARCH -->
 <div id="properties">
         <div class="col-md-4 col-sm-12 mx-auto " >
-          
+   
           <!-- Actual search box -->
           <div class="form-group">
-            <input type="text" class="form-control fa fa-search  search" placeholder="Search">
+            <input type="text" class="form-control fa fa-search  search" placeholder="Address,Province,City,Category" id="basics">
           </div>
          <p><small><small>
             Sort by:
@@ -37,9 +37,6 @@
 
           <div class="filter-group ">
           <div class="form-group   mx-auto">
-             <p class="text-primary"><small>
-                      Filters:
-             </small></p>
             <div class="radio-inline">
               <label class="text-muted">
                 <input class="filter " type="radio" value="Harare" name="address" id="address"/> 
@@ -47,12 +44,40 @@
               </label>
            
               <label class="text-muted">
-                <input class="filter " type="radio" value="Rd" name="address" id="address"/> <small>Road</small>
+                <input class="filter " type="radio" value="Rd" name="address" id="address"/> <small>Bulawayo</small>
               </label>
             
               <label class="text-muted">
-                <input class="filter" type="radio" value="Ave" name="address" id="address"/><small>Avenue</small> 
+                <input class="filter" type="radio" value="Ave" name="address" id="address"/><small>Chitungwiza</small> 
               </label>
+
+                <label class="text-muted">
+                  <input class="filter" type="radio" value="Ave" name="address" id="address" /><small>Kwekwe</small>
+                </label>
+                  <label class="text-muted">
+                    <input class="filter" type="radio" value="Ave" name="address" id="address" /><small>Gweru</small>
+                  </label>
+                    <label class="text-muted">
+                      <input class="filter" type="radio" value="Ave" name="address" id="address" /><small>Stand</small>
+                    </label>
+                      <label class="text-muted">
+                        <input class="filter" type="radio" value="Ave" name="address" id="address" /><small>Rent</small>
+                      </label>
+                        <label class="text-muted">
+                          <input class="filter" type="radio" value="Ave" name="address" id="address" /><small>Buy</small>
+                        </label>
+                          <label class="text-muted">
+                            <input class="filter" type="radio" value="Ave" name="address" id="address" /><small>Mortgage</small>
+                          </label>
+                            <label class="text-muted">
+                              <input class="filter" type="radio" value="Ave" name="address" id="address" /><small>Room</small>
+                            </label>
+                              <label class="text-muted">
+                                <input class="filter" type="radio" value="Ave" name="address" id="address" /><small>Flat</small>
+                              </label>
+                                <label class="text-muted">
+                                  <input class="filter" type="radio" value="Ave" name="address" id="address" /><small>House</small>
+                                </label>
             </div>
            
               <button class="btn btn-primary" onclick="resetList();">Clear</button>

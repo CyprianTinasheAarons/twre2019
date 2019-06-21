@@ -35,7 +35,7 @@ class CommentForm(FlaskForm):
 
 class PropertyForm(FlaskForm):
     title =StringField('Property Title', validators=[Required()])
-    category = SelectField('Category', choices=[('For Sale','For Sale'),('For Letting','For Letting')])
+    category = SelectField('Category', choices=[('For Sale','For Sale'),('For Rent','For Rent')])
     address = StringField('Address', validators=[Length(0, 64)])
     price = IntegerField('Price', validators=[])
     body = TextAreaField('Description' , id="editor1")

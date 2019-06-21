@@ -4,20 +4,27 @@
 
     <a href="{{ url_for('.property' , id=i[0] ) }}" style="text-decoration: none;">
 
- <div class="card   border border-white">
+ <div class="card h-100">
    
      <img src="{{i[5][0]['photo']}}" alt="image" class="card-img-top " style="height:200px;" >
   
    <div class="card-body">
     
-    <h3 class="text-dark ">{{i[1]}}</h3>
-    <p class="lead">
-      {{i[2]}} | ${{i[3]}}
+    <p class="text-dark title p-0 m-0 ">
+      <strong>{{i[1]}}</strong>
+      
+    </p>
+    <p class="lead p-0 m-0">
+      {{i[2]}} </p>
+      <p class="lead p-0 m-0">
+       ${{i[3]}}
     </p>
      
      
-     <p class="lead " data-toggle="tooltip" data-placement="top" title="Click For Map"> <a href="http://maps.google.com/?q={{i[4]}}" style="text-decoration: none;">
-         {{i[4]}}
+     <p class="lead  p-0 m-0" data-toggle="tooltip" data-placement="top" title="Click For Map"> <a href="http://maps.google.com/?q={{i[4]}}" style="text-decoration: none;">
+      <span>
+      <i class="fa fa-map-marker"></i>
+      </span>{{i[4]}}
        </a></p>
 
          

@@ -11,7 +11,8 @@
      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
       <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
       <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/ekko-lightbox.css') }}">
-    
+      
+
     <link rel="icon" href="{{ url_for('static', filename='img/Rent_25px.png') }}">
     {{ moment.include_jquery() }}
     {{ moment.include_moment() }}
@@ -19,6 +20,10 @@
 
     {% endblock %}
     <style>
+
+      .card{
+         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      }
 
 .text-responsive {
   font-size: calc(100% + 1vw + 1vh);
@@ -330,6 +335,8 @@
 <script src="{{ url_for('static', filename='js/list.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/ekko-lightbox.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/jquery.easyPaginate.js') }}"></script>
+
+
 
 
 
