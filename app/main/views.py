@@ -55,7 +55,7 @@ def home():
     return render_template('home.html', estates=estates )
  
 @main.route('/properties',  methods=['GET','POST'])
-@cache.cached(timeout=300, key_prefix="properties")
+# @cache.cached(timeout=300, key_prefix="properties")
 def properties():
     estatesDB=mongo.db.Estates
     estates =[]
