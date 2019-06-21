@@ -46,7 +46,7 @@
          </div>
        
 </div>
-        <div class="col-md-6 card m-1 ">
+        <div class="col-md-6 card my-1 ">
             <!-- Contact Realtor -->
             <section class="p-2 m-2 sticky-top" style="z-index: inherit;">
         
@@ -55,7 +55,8 @@
                     </h5>
         
                     <div>
-                        <form method="GET" enctype="text/plain" action="mailto:sales@twre.co.zw">
+                        <form method="POST" id="contactform" action="https://formsubmit.io/send/twreZim@gmail.com">
+                            <input name="_redirect" type="hidden" id="name" value="https://www.twre.co.zw/properties"
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" class="form-control" name="name" placeholder="joe Doe">
@@ -84,7 +85,7 @@
                                 <label for="name">Attachments</label>
                                 <input type="file" name="file" class="form-control">
                             </div>
-        
+                        
                              <input class="btn btn-primary " type="submit" value="Click Here">
 
                         </form>
