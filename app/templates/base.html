@@ -418,11 +418,17 @@ function resetList(){
 function updateList(){
 
 	var values_address = $("input[name=address]:checked").val();
-	console.log(values_address);
+	
+	var values_title = $("input[name=title]:checked").val();
+
+	var values_category = $("input[name=category]:checked").val();
+
 
 	propertyList.filter(function (item) {
 		
 		var addressFilter = false;
+    var titleFilter = false;
+    var categoryFilter = false;
 		
 		if(values_address == null)
 		{ 
@@ -430,8 +436,24 @@ function updateList(){
 		} else {
 			addressFilter = item.values().address.indexOf(values_address) >= 0;
 		}
-		return addressFilter 
+
+    if (values_title == null) {
+      titleFilter = true;
+    } else {
+      titleFilter = item.values().title.indexOf(values_title) >= 0;
+    }
+
+    
+    if (values_category == null) {
+      categoryFilter = true;
+    } else {
+      categotyFilter = item.values().category.indexOf(values_category) >= 0;
+    }
+
+		return addressFilter && titleFilter && categoryFilter
 	});
+
+  
 	propertyList.update();
 	
 }
@@ -439,6 +461,8 @@ function updateList(){
 $(function(){
   //updateList();
 	$('input[name=address]').change(updateList);
+  $('input[name=title]').change(updateList);
+  $('input[name=category]').change(updateList);
 	
 	propertyList.on('updated', function (list) {
 		if (list.matchingItems.length > 0) {

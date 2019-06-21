@@ -16,74 +16,88 @@
         <div class="col-md-4 col-sm-12 mx-auto " >
    
           <!-- Actual search box -->
-          <div class="form-group">
-            
+          <div class="form-group">         
             <input type="text" class="form-control fa fa-search  search" placeholder=" Search with Address,Province,City,Category" id="basics">
           </div>
-         <p><small><small>
-            Sort by:
-         </small></small>
-          <button class="sort btn btn-light  text-muted" data-sort="title">
-            title
-          </button>
-          <button class="sort btn btn-light  text-muted" data-sort="price">
-            price
-          </button>
-          <button class="sort btn btn-light text-muted" data-sort="category">
-            category
-          </button>
-           <button class="sort btn btn-light text-muted" data-sort="address">
-            address
-          </button> </p>
 
-          <div class="filter-group ">
-          <div class="form-group   mx-auto">
-            <div class="radio-inline">
-              <label class="text-muted">
-                <input class="filter " type="radio" value="Harare" name="address" id="address"/> 
-                <small>Harare</small>
-              </label>
-           
-              <label class="text-muted">
-                <input class="filter " type="radio" value="Rd" name="address" id="address"/> <small>Bulawayo</small>
-              </label>
-            
-              <label class="text-muted">
-                <input class="filter" type="radio" value="Ave" name="address" id="address"/><small>Chitungwiza</small> 
-              </label>
 
-                <label class="text-muted">
-                  <input class="filter" type="radio" value="Ave" name="address" id="address" /><small>Kwekwe</small>
-                </label>
-                  <label class="text-muted">
-                    <input class="filter" type="radio" value="Ave" name="address" id="address" /><small>Gweru</small>
-                  </label>
+          <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Dropdown link
+            </a>
+          
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <p class="dropdown-item"><small><small>
+                    Sort by:
+                  </small></small>
+                <button class="sort btn btn-light  text-muted" data-sort="title">
+                  title
+                </button>
+                <button class="sort btn btn-light  text-muted" data-sort="price">
+                  price
+                </button>
+                <button class="sort btn btn-light text-muted" data-sort="category">
+                  category
+                </button>
+                <button class="sort btn btn-light text-muted" data-sort="address">
+                  address
+                </button> </p>
+              
+              <div class="filter-group dropdown-item ">
+                <div class="form-group   mx-auto">
+                  <div class="radio-inline">
                     <label class="text-muted">
-                      <input class="filter" type="radio" value="Ave" name="address" id="address" /><small>Stand</small>
+                      <input class="filter " type="radio" value="Harare" name="address" id="address" />
+                      <small>Harare</small>
                     </label>
-                      <label class="text-muted">
-                        <input class="filter" type="radio" value="Ave" name="address" id="address" /><small>Rent</small>
-                      </label>
-                        <label class="text-muted">
-                          <input class="filter" type="radio" value="Ave" name="address" id="address" /><small>Buy</small>
-                        </label>
-                          <label class="text-muted">
-                            <input class="filter" type="radio" value="Ave" name="address" id="address" /><small>Mortgage</small>
-                          </label>
-                            <label class="text-muted">
-                              <input class="filter" type="radio" value="Ave" name="address" id="address" /><small>Room</small>
-                            </label>
-                              <label class="text-muted">
-                                <input class="filter" type="radio" value="Ave" name="address" id="address" /><small>Flat</small>
-                              </label>
-                                <label class="text-muted">
-                                  <input class="filter" type="radio" value="Ave" name="address" id="address" /><small>House</small>
-                                </label>
+              
+                    <label class="text-muted">
+                      <input class="filter " type="radio" value="Bulawayo" name="address" id="address" /> <small>Bulawayo</small>
+                    </label>
+              
+                    <label class="text-muted">
+                      <input class="filter" type="radio" value="Chitungwiza" name="address" id="address" /><small>Chitungwiza</small>
+                    </label>
+                    <label class="text-muted">
+                      <input class="filter" type="radio" value="Gweru" name="address" id="address" /><small>Gweru</small>
+                    </label>
+                    <label class="text-muted">
+                      <input class="filter" type="radio" value="Stand" name="title" id="title" /><small>Stand</small>
+                    </label>
+                    <label class="text-muted">
+                      <input class="filter" type="radio" value="For Rent" name="category" id="category" /><small>Rent</small>
+                    </label>
+                    <label class="text-muted">
+                      <input class="filter" type="radio" value="For Sale" name="category" id="category" /><small>Buy</small>
+                    </label>
+                    <label class="text-muted">
+                      <input class="filter" type="radio" value="Mortgage" name="title" id="title" /><small>Mortgage</small>
+                    </label>
+                    <label class="text-muted">
+                      <input class="filter" type="radio" value="Room" name="category" id="category" /><small>Room</small>
+                    </label>
+                    <label class="text-muted">
+                      <input class="filter" type="radio" value="Flat" name="title" id="title" /><small>Flat</small>
+                    </label>
+                    <label class="text-muted">
+                      <input class="filter" type="radio" value="House" name="title" id="title" /><small>House</small>
+                    </label>
+                  </div>
+              
+                  <button class="btn btn-primary" onclick="resetList();">Clear</button>
+                </div>
+              </div>
             </div>
-           
-              <button class="btn btn-primary" onclick="resetList();">Clear</button>
           </div>
-          </div>
+
+
+
+
+
+
+
+
 
         </div>
        
