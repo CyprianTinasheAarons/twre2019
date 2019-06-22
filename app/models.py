@@ -11,14 +11,15 @@ class User( UserMixin):
         _id = self.user_json.get('_id')
         return str(_id)
  
-    def is_admin(self):
-        print(self.user_json)
+    def isAdmin(self):
         query = mongo.db.Users.find({'email': session['email']},{'role': '1'})
         for i in query :
             dbRole = i['role']
         if dbRole == 'admin':
             return True
-
+        else:
+            return False
+        
 
 
         

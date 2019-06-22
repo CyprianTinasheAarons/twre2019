@@ -69,14 +69,32 @@
     </h1>
   </div>
 
+  <div id="postlist">
+  <div class="row">
+    <div class="col-md-4 col-sm-12 mx-auto">
+      <div class="form-group">
+        <input type="text" class="form-control fa fa-search  search" placeholder=" Search For Articles..." id="basics">
+      </div>
+    </div>
+  </div>
+
 <!-- posts section -->
-<div class="row" >
+<div class="row list" >
 
     {% include '_posts.html' %}
 </div>
 
-<br>
+<div class="row">
+  <div class="col-md- col-sm- mx-auto">
+    <p class="lead text-muted text-center">
+      Pages:</p>
+    <ul class="pagination text-center"></ul>
 
+
+
+  </div>
+</div>
+</div>
 
 
 

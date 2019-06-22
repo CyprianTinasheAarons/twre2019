@@ -289,22 +289,27 @@ def edit_property (id):
 
     form = PropertyForm()
     if form.validate_on_submit():
-        # photo_file = {}
-        # photo_filenames=[]
-        # photo = request.files['images']
-        # for photo in form.images.data:
-        #     if photo:
-        #         photo_upload=upload_image(photo, folder='properties/')
-        #         photo_url=photo_upload.url
-        #     photo_file = {
-        #         'photo': photo_url
-        #     }
-        #     photo_filenames.append(photo_file)
+        photo_file = {}
+        photo_filenames=[]
+        try:
+            photo = request.files['images']
+            for photo in form.images.data:
+                if photo:
+                    photo_upload=upload_image(photo, folder='properties/')
+                    photo_url=photo_upload.url
+                photo_file = {
+                    'photo': photo_url
+                }
+                photo_filenames.append(photo_file)
+                photos = photo_filenames
+             
+        except:
+            photos = oldPhotos
+        
         query1 = mongo.db.Users.find({'email': session['email'] },{'username': '1'})
         for i in query1:
             author=i['username']
-
-        mongo.db.Estates.update({'_id': id},{'Author': author,'Title': request.form['title']  , 'Category' : request.form['category'], 'Address' : request.form['address'] ,'Price': request.form['price'], 'Body' : request.form['body'], 'Photos': oldPhotos ,'Date' : date, 'Edit-Date': datetime.now() })
+        mongo.db.Estates.update({'_id': id},{'Author': author,'Title': request.form['title']  , 'Category' : request.form['category'], 'Address' : request.form['address'] ,'Price': request.form['price'], 'Body' : request.form['body'], 'Photos': photos ,'Date' : date, 'Edit-Date': datetime.now() })
         flash('The property has been updated.')
         return redirect(url_for('main.property' , id= id))
     form.title.data = oldTitle
