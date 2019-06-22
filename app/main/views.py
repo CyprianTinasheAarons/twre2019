@@ -73,7 +73,6 @@ def properties():
 @cache.cached(timeout=300, key_prefix="blog")
 def blog():
     posts = []
-    
     query = mongo.db.Posts.find({},{"_id": "1" , "Title": "1" ,"Summary": "1" , "Image_url" : "" }).sort('_id' , -1)
     for  i in query:
         _id = i['_id']
@@ -81,7 +80,6 @@ def blog():
         summary = i['Summary']
         image = i['Image_url']
         posts.append([_id ,title , summary ,image ])
-    
     return render_template('blog.html' ,posts=posts   )
 
 
