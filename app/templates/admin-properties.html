@@ -16,7 +16,7 @@
 </ul>
 
 
-<div class="row">
+<div class="row " id="table">
 <div class="col m-1">
              
                
@@ -25,15 +25,11 @@
                 Properties
 
                     </h1>
-                          
-   <div class="row">
+                  <!-- search         -->
+   <div class="row" >
           <div class="col-md-4 mx-auto">
-
-              {{ wtf.quick_form(form1 ,action='/admin/properties/search') }} 
-             
+            <input type="text" class="form-control   search" placeholder=" Search Properties..." id="basics">   
           </div>
-                  
-          
       </div>
     
 <div class="row">
@@ -42,12 +38,9 @@
                 <button class="btn btn-primary text-white " data-toggle="modal" data-target="#add_propertyModal" >Add Property</button>
         </a>
     </div>
-</div>
-
-
-                      
+</div>                     
                    <div class="table-responsive">
-                                <table class="table table-striped ">
+                                <table class="table table-striped">
                                         <thead class="thead">
                                             <tr>
                                                 <th>#</th>
@@ -68,7 +61,7 @@
                                                 <th>Edit Property</th>
                                             </tr>
                                         </thead>
-              <tbody id="easyPaginate">
+              <tbody class="list" >
                  {% include '_propertylist.html' %}
         </tbody>
                    </table>
@@ -76,6 +69,18 @@
 
                             
                 </section>
+
+                    <div class="row">
+                        <div class="col-md- col-sm- mx-auto">
+                            <p class="lead text-muted text-center">
+                                Pages:</p>
+                            <ul class="pagination text-center"></ul>
+                    
+                    
+                    
+                        </div>
+                    </div>
+
 </div>
 </div>
 

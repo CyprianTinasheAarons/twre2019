@@ -151,10 +151,10 @@
     <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
     
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-    
+    <script src="{{ url_for('static', filename='js/list.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <script src="{{ url_for('static', filename='js/ckeditor.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/jquery.easyPaginate.js') }}"></script>
+    
 <script>
 $(document).ready(function() {
     // show the alert
@@ -168,12 +168,7 @@ $(document).ready(function() {
                 // instance, using default configuration.
                 CKEDITOR.replace( 'editor1' );
             </script>
-<script>
-$('#easyPaginate').easyPaginate({
-    paginateElement: 'tr',
-    elementsPerPage: 4
-});
-</script>
+
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
@@ -188,5 +183,36 @@ $('#easyPaginate').easyPaginate({
     })();
 </script>
 <!--End of Tawk.to Script-->
+
+<!-- listjs -->
+<script>
+
+    var options = {
+            valueNames: [ '_id','title', 'price', 'category', 'address','date' ,'author'],
+            page: 8,
+            pagination: true
+        };
+
+        var propertyList = new List('table', options);
+
+
+        
+    var options = {
+                valueNames: ['_id', 'title', 'date', 'author'],
+                page: 8,
+                pagination: true
+            };
+
+    var postList = new List('table2', options);
+
+    var options = {
+            valueNames: ['_id', 'username', 'date', 'email'],
+            page: 8,
+            pagination: true
+        };
+
+        var userList = new List('table3', options);
+
+</script>
     </body>
     </html>

@@ -14,15 +14,14 @@
     <a class="btn btn-warning  m-1" href="/admin/users"> <i class="fa fa-user"></i>Users</a></li>
 </ul>
 
-<section>
+<section id="table3">
     <h1 class="display-4 text-primary text-center">
         User Profiles
     </h1>
   <div class="row">
                         <div class="col-md-3 mx-auto m-1">
                 
-                      {{wtf.quick_form(form , action='/admin/users/search')}}
-                    
+                    <input type="text" class="form-control   search" placeholder=" Search Users..." id="basics">
                   
         </div>
     </div>
@@ -38,11 +37,21 @@
                             </tr>
                         </thead>
 
-<tbody id="easyPaginate">
+<tbody class="list">
                 {% include '_user.html' %}
                 </tbody>
    </table>
    </div>
+    <div class="row">
+        <div class="col-md- col-sm- mx-auto">
+            <p class="lead text-muted text-center">
+                Pages:</p>
+            <ul class="pagination text-center"></ul>
+    
+    
+    
+        </div>
+    </div>
 </section>
 
     

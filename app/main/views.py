@@ -3,7 +3,7 @@ from flask import render_template, session, redirect, url_for,request,current_ap
 from . import main
 from flask_pymongo import pymongo ,MongoClient
 from flask_login import login_required
-from .forms import PostForm,PropertyForm,EditProfileForm,CommentForm,EditProfileAdminForm,SearchForm
+from .forms import PostForm,PropertyForm,EditProfileForm,CommentForm,EditProfileAdminForm
 from flask_login import current_user
 from werkzeug import secure_filename
 from functools import wraps
@@ -31,9 +31,6 @@ def admin_required(f):
 def getNextSequence(collection,name):
     return collection.find_and_modify(query= { '_id': name },update= { '$inc': {'seq': 1}}, new=True ).get('seq')
 
-def search(collection,search_text):
-    return collection.find({"$text": {"$search": search_text}}).limit(10)
-
 def delete(collection,uniqueid):
     return collection.remove({'_id': uniqueid})
 
@@ -55,7 +52,7 @@ def home():
     return render_template('home.html', estates=estates )
  
 @main.route('/properties',  methods=['GET','POST'])
-# @cache.cached(timeout=300, key_prefix="properties")
+@cache.cached(timeout=300, key_prefix="properties")
 def properties():
     estatesDB=mongo.db.Estates
     estates =[]
@@ -68,15 +65,15 @@ def properties():
         address = i['Address']
         photos = i['Photos']
         estates.append([ _id,title, category , price , address , photos])
-    form = SearchForm()     
-    return render_template('properties.html', estates=estates , form=form  )
+    
+    return render_template('properties.html', estates=estates )
 
     
 @main.route('/blog',methods=['GET','POST'])
 @cache.cached(timeout=300, key_prefix="blog")
 def blog():
     posts = []
-    postsSearch=[]
+    
     query = mongo.db.Posts.find({},{"_id": "1" , "Title": "1" ,"Summary": "1" , "Image_url" : "" }).sort('_id' , -1)
     for  i in query:
         _id = i['_id']
@@ -84,30 +81,9 @@ def blog():
         summary = i['Summary']
         image = i['Image_url']
         posts.append([_id ,title , summary ,image ])
-
-    form = SearchForm()
-  
     
-    return render_template('blog.html' ,posts=posts  , form=form )
+    return render_template('blog.html' ,posts=posts   )
 
-
-@main.route('/blog/search' ,methods=['GET','POST'])
-@cache.cached(timeout=300, key_prefix="blog_search")
-def blog_search():
-    
-    postsSearch=[]
-    form = SearchForm()
-    if form.validate_on_submit():
-        searchQuery=search( mongo.db.Posts, search_text = request.form['search'])
-        for i in searchQuery:
-            _id =i['_id']
-            title = i['Title']
-            summary = i['Summary'] 
-            image = i['Image_url']
-            postsSearch.append([ _id,title,summary, image]
-            )
-
-    return render_template('blog.html' ,postsSearch=postsSearch , form=form )
 
 @main.route('/about')
 @cache.cached(timeout=300, key_prefix="about")
@@ -202,33 +178,12 @@ def admin():
     count_users = mongo.db.Users.count()
     return render_template('admin.html' , count_posts=count_posts,count_estates=count_estates,count_users=count_users )
 
-@main.route('/admin/properties/search' ,methods=['GET' , 'POST'])
-@login_required
-@admin_required
-def admin_properties_search():
-    propertyList =[]
-    form1 =SearchForm()
-    form2=PropertyForm()
-    if form1.validate_on_submit():
-        searchQuery=search( mongo.db.Estates, search_text= request.form['search'])
-        for i in searchQuery:
-            _id = i['_id']
-            authorName=i['Author']
-            title = i['Title']
-            category = i['Category'] 
-            address = i['Address']
-            price = i['Price']
-            date = i['Date']
-            propertyList.append([_id,title, category ,address , price , date ,authorName])
-        
-    return render_template('admin-properties.html' ,form1=form1, form2=form2,propertyList=propertyList )
 
 @main.route('/admin/properties' ,methods=['GET' , 'POST'])
 @login_required
 @admin_required
 def admin_properties():
     propertyList =[]
-    form1 =SearchForm()
     query = mongo.db.Estates.find({},{"_id":"1" ,"Title":"1", "Category":"1","Price":"1" ,"Address":"1","Date": "1","Author" : "1"})
     for i in query:
             _id = i['_id']
@@ -258,32 +213,17 @@ def admin_properties():
             author=i['username']
         mongo.db.Estates.insert({ '_id': getNextSequence(mongo.db.Counters,"estateId"),'Author':author , 'Title' : request.form['title'], 'Category' : request.form['category'] ,'Address': request.form['address'],'Price': int(request.form['price']),'Body': request.form['body'],'Photos': photo_filenames ,'Date' : datetime.now()})
         return redirect(url_for('.properties'))
-    return render_template('admin-properties.html',form1=form1, form2=form2, propertyList=propertyList )
+    return render_template('admin-properties.html', form2=form2, propertyList=propertyList )
 
 
 
-@main.route('/admin/posts/search' ,methods=['GET' , 'POST'])
-@login_required
-@admin_required
-def admin_posts_search():
-    postsList =[]
-    form1=SearchForm()
-    form2=PostForm()
-    if form1.validate_on_submit():
-        searchQuery=search( mongo.db.Posts, search_text= request.form['search'])
-        for i in searchQuery:
-            _id = i['_id']
-            title = i['Title']
-            date = i['Date']
-            postsList.append([ _id, title ,date])
-    return render_template('admin-posts.html',form1=form1,form2=form2, postsList=postsList  )
+
 
 @main.route('/admin/posts' ,methods=['GET' , 'POST'])
 @login_required
 @admin_required
 def admin_posts():
     postsList =[]
-    form1=SearchForm()
     query = mongo.db.Posts.find({},{"_id": "1" , "Title": "1" , "Date" : "1"})
     for  i in query:
         _id = i['_id']
@@ -299,33 +239,15 @@ def admin_posts():
             
         mongo.db.Posts.insert({ '_id': getNextSequence(mongo.db.Counters,"postId"),'Title' : request.form['title'], 'Summary' : request.form['summary'] ,'Body': request.form['body'],'Image_url': photo_url , 'Date': datetime.now()})
         return redirect(url_for('.blog'))
-    return render_template('admin-posts.html',form1=form1,form2=form2, postsList=postsList  )
+    return render_template('admin-posts.html',form2=form2, postsList=postsList  )
 
 
-
-@main.route('/admin/users/search' , methods=['GET', 'POST'])
-@login_required
-@admin_required
-def admin_users_s():
-    usersList=[]
-    form = SearchForm()
-    if form.validate_on_submit():
-        searchQuery=search( mongo.db.Users, search_text= request.form['search'])
-        for i in searchQuery:
-            _id = i["_id"]
-            username = i["username"]
-            email = i["email"]
-            date = i["Date"]
-    
-            usersList.append([ _id ,username,email ,date])
-    return render_template('admin-users.html' ,usersList=usersList ,form=form )
 
 @main.route('/admin/users' , methods=['GET', 'POST'])
 @login_required
 @admin_required
 def admin_users():
     usersList=[]
-    form = SearchForm()
     query = mongo.db.Users.find({}).sort("_id" ,-1)
     for i in query:
             _id = i["_id"]
@@ -334,7 +256,7 @@ def admin_users():
             date = i["Date"]
             usersList.append([ _id ,username,email ,date])
 
-    return render_template('admin-users.html' ,usersList=usersList ,form=form )
+    return render_template('admin-users.html' ,usersList=usersList  )
 
 @main.route('/admin/user_delete/<int:id>', methods=[ 'GET','POST'])
 @login_required

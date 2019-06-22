@@ -42,7 +42,3 @@ class PropertyForm(FlaskForm):
     images = MultipleFileField('Add Images')
     submit1= SubmitField('Submit' , id="btn")
 
-class SearchForm(FlaskForm):
-    search = StringField()
-    submit2= SubmitField('Search', id="btn")
-   
