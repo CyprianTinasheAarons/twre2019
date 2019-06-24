@@ -302,10 +302,8 @@ def edit_property (id):
                 }
                 photo_filenames.append(photo_file)
                 photos = photo_filenames
-             
         except:
             photos = oldPhotos
-        
         query1 = mongo.db.Users.find({'email': session['email'] },{'username': '1'})
         for i in query1:
             author=i['username']

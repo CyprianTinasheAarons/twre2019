@@ -8,6 +8,11 @@ from config import config
 from flask_login import LoginManager,UserMixin
 from flask_caching import Cache
 from .models import User
+from flask_compress import Compress
+
+COMPRESS_MIMETYPES = ['text/html', 'text/css', 'text/xml', 'application/json', 'application/javascript']
+COMPRESS_LEVEL = 6
+COMPRESS_MIN_SIZE = 500
  
 client = pymongo.MongoClient("mongodb+srv://twre:qwertyuiop@cluster0-igeuf.mongodb.net/test?retryWrites=true&w=majority")
 mongo= client.twredb
@@ -28,6 +33,9 @@ bootstrap = Bootstrap()
 mail = Mail()
 moment = Moment()
 cache = Cache(config={'CACHE_TYPE': 'simple'})
+compress =Compress()
+
+
 
 
 def create_app(config_name):
@@ -43,5 +51,7 @@ def create_app(config_name):
     mail.init_app(app)
     moment.init_app(app)
     cache.init_app(app)
+    compress.init_app(app)
+    Compress(app)
 
     return app

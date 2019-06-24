@@ -12,7 +12,7 @@ Flask-Caching==1.7.2
 Flask-Bootstrap==3.3.7.1                   
 Flask-Login==0.4.1                     
 Flask-Mail==0.9.1                     
-Flask-Materialize==0.2.4                     
+Flask-Materialize==0.2.4                    
 Flask-Migrate==2.3.1                     
 Flask-Moment==0.6.0                     
 Flask-PageDown==0.2.2                     
@@ -35,3 +35,9 @@ WTForms==2.2.1
 cloudinary==1.16.0
 Flask-Assets==0.12
 webassets==0.12.1
+Flask-Compress==1.4.0
+Flask-CDN==1.5.3
+flask-static-compress==1.0.2 
+jac==0.17.2 
+ordereddict==1.1 
+rjsmin==1.1.0
