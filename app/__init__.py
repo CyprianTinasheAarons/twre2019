@@ -8,7 +8,7 @@ from config import config
 from flask_login import LoginManager,UserMixin
 from flask_caching import Cache
 from .models import User
-from flask_assets import Environment,Bundle
+
 
 
  
@@ -26,15 +26,10 @@ def load_user(user_id):
     user_json = users.find_one({'_id': 'Int32(user_id)' })
     return User(user_json)
 
-assets = Environment()
 bootstrap = Bootstrap()
 mail = Mail()
 moment = Moment()
 cache = Cache(config={'CACHE_TYPE': 'simple'})
-
-
-js = Bundle('jquery.min.js', 'bootstrap.min.js', 'config.js','ekko-lightbox.min.js' , 'jquery.min.js' ,'list.min.js ','popper.min.js' ,'styles.js',filters='jsmin', output='gen/packed.js')
-assets.register('js_all', js)
 
 
 
@@ -51,5 +46,5 @@ def create_app(config_name):
     mail.init_app(app)
     moment.init_app(app)
     cache.init_app(app)
-    assets.init_app(app)
+  
     return app

@@ -9,7 +9,7 @@ from werkzeug import secure_filename
 from functools import wraps
 from cloudinary.uploader import upload_image
 from cloudinary.utils import cloudinary_url
-from app import cache ,assets
+from app import cache 
 
 # mongodb database connection
 client = pymongo.MongoClient("mongodb+srv://twre:qwertyuiop@cluster0-igeuf.mongodb.net/test?retryWrites=true&w=majority")
