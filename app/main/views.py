@@ -53,24 +53,7 @@ def home():
 
 @main.route('/sitemap.xml', methods=['GET'])
 def sitemap():
-    try:
-      """Generate sitemap.xml. Makes a list of urls and date modified."""
-      pages=[]
-      ten_days_ago=(datetime.now() - timedelta(days=7)).date().isoformat()
-      # static pages
-      for rule in app.url_map.iter_rules():
-          if "GET" in rule.methods and len(rule.arguments)==0:
-              pages.append(
-                           ["https://www.twre.co.zw"+str(rule.rule),ten_days_ago]
-                           )
-
-      sitemap_xml = render_template('sitemap.xml', pages=pages)
-      response= make_response(sitemap_xml)
-      response.headers["Content-Type"] = "application/xml"    
-    
-      return response
-    except Exception as e:
-        return(str(e))	
+    return render_template('sitemap.xml')
  
 @main.route('/properties',  methods=['GET','POST'])
 @cache.cached(timeout=300, key_prefix="properties")
