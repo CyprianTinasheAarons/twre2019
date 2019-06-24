@@ -51,7 +51,7 @@ def home():
         estates.append([ _id,title, category , price , address , image])
     return render_template('home.html', estates=estates )
 
-@app.route('/sitemap.xml', methods=['GET'])
+@main.route('/sitemap.xml', methods=['GET'])
 def sitemap():
     try:
       """Generate sitemap.xml. Makes a list of urls and date modified."""
