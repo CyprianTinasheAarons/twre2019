@@ -317,11 +317,12 @@
     
 </div>
 {% assets 'js_all '%}
-<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<!-- <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/list.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/ekko-lightbox.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/ekko-lightbox.min.js') }}"></script> -->
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}
 
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
