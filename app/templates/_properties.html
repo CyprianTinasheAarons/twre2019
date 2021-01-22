@@ -1,32 +1,44 @@
-
-                
-
-  {% for i in estates %}
-         
- <div class=" col-md-3 my-2 ">
-       <a href="{{ url_for('.property' , id=i[0] ) }}" style="text-decoration: none;" >
-         <div class="card h-100">
-          
-            <img src="{{i[5][0]['photo']}}" alt="image" class="card-img-top " style="height:200px;" >
-         
-          <div class="card-body">
-            <p class="text-dark title p-0 m-0"><strong>{{i[1]}}</strong>
-           </p>
-           <p class=" lead category p-0 m-0 ">
-             {{i[2]}} </p>
-             <p class=" lead price p-0 m-0">${{i[3]}}
-         </p>
-         
-            <p class=" lead address p-0 m-0" data-toggle="tooltip" data-placement="top" title="Click For Map"> <a href="http://maps.google.com/?q={{i[4]}}" style="text-decoration: none;"><span>
-              <i class="fa fa-map-marker"></i>
-            </span>
-               {{i[4]}}
-              </a></p>
+{% for i in estates %}
+<div class="col-md-3 my-1">
+  <a
+    href="{{ url_for('.property' , id=i[0] ) }}"
+    style="text-decoration: none; cursor: pointer"
+  >
+    <div class="card rounded-lg">
+      <img
+        src="{{i[5][0]['photo']}}"
+        alt="image"
+        class="card-img-top"
+        style="height: 200px"
+      />
     </div>
-  </div>
-</a>
-    
-</div>
- 
-      {% endfor %}
+    <div style="padding: 10px">
+      <p class="text-dark title p-0 m-0">
+        <strong>{{i[1]}}</strong>
+      </p>
+      <p
+        class="lead p-0 m-0"
+        style="color: #000; font-weight: bold; font-size: 1.25em"
+      >
+        ${{i[3]}}
+      </p>
+      <p class="lead p-0 m-0" style="color: #000">{{i[2]}}</p>
 
+      <p
+        class="lead p-0 m-0"
+        data-toggle="tooltip"
+        data-placement="top"
+        title="Click For Map"
+      >
+        <a
+          href="http://maps.google.com/?q={{i[4]}}"
+          style="text-decoration: none; color: #000"
+        >
+          <span> <i class="fa fa-map-marker"></i> </span>{{i[4]}}
+        </a>
+      </p>
+    </div>
+  </a>
+</div>
+
+{% endfor %}

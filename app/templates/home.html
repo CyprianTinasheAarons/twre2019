@@ -25,15 +25,15 @@
           <div class="container">
             <div class="carousel-caption d-none d-sm-block mb-5">
               <h1 class="display-3">Properties</h1>
-            
+              <p class="lead">The best properties in Zimbabwe.</p>
               <a href="{{url_for('.properties')}}" class="btn btn-primary btn-lg">View Properties</a>
             </div>
           </div>
         </div>
 
-        <div class="carousel-item carousel-image-1">
+        <div class="carousel-item carousel-image-3">
           <div class="container">
-            <div class="carousel-caption d-none d-sm-block text-right mb-5">
+            <div class="carousel-caption d-none d-sm-block text-left mb-5">
               <h1 class="display-3">Rentals</h1>
               <p class="lead">Best rental properties in Zimbabwe</p>
               <a href="{{url_for('.properties')}}" class="btn btn-primary btn-lg">View Properties</a>
@@ -65,14 +65,15 @@
     <hr>
     <!-- Card Property list 4 new properties -->
   
-<h1 class="text-center">
- <a href="/properties" class="lead btn btn-grey text-primary  border border-primary  ">
-            View All
-            </a>
-            </h1>
+
 <div class="row">
   {% include '_properties-home.html' %}
 </div>
+<h1 class="text-center">
+  <a href="/properties" class="btn btn-primary btn-lg">
+             View All Properties
+             </a>
+             </h1>
 </section>
 <hr>
 

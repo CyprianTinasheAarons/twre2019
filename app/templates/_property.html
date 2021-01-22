@@ -1,93 +1,154 @@
 <div class="col-md-6">
-       
-               <!-- current property title  -->
-    <div>
-        <h4 class="text-center display-4 text-responsive">
-            {{estate['title']}}
-        </h4>
-    </div>
+  <!-- current property title  -->
+  <div>
+    <h4 class="text-center display-4 text-responsive">{{estate['title']}}</h4>
+  </div>
 
-<br>
-  
-       
-               <div class="card  border border-white">
-   <div class="card-img-top bg-white">
-        <img src="{{estate['image'][0]['photo']}}" alt="image" class="card-img-top">
-          </div>
-           
-                               <div class="card-body bg-light">
-                                               
-                        <h4 class="card-title lead "><strong> {{ estate['category'] }}</strong></h4>
-                        <h4 class="card-title lead "><strong>${{estate['price']}}
-                        </strong></h4>
-                        <h4 class="card-title lead " ><strong> <a href="http://maps.google.com/?q={{estate['address']}}" data-toggle="tooltip" data-placement="top" title="Click For Map">
-                               {{estate['address']}}
-                               </a></strong></h4>
-                               <p class="lead">
-                                   {{estate['body'] | safe}}
-                               </p>
-                           <h1 class="lead text-primary text-center">
-                               Photos
-                           </h1>   
-          <div class="row justify-content-center">
-    <div class="col-md-8">
+  <br />
+
+  <div class="card border border-white">
+    <div class="card-img-top bg-white">
+      <img
+        src="{{estate['image'][0]['photo']}}"
+        alt="image"
+        class="card-img-top"
+      />
+    </div>
+  </div>
+
+  <div class="m-2 p-2">
+    <h4 class="lead" style="font-weight: bold">
+      <strong> {{ estate['category'] }}</strong>
+    </h4>
+    <h4 class="lead display-5" style="font-weight: bold">
+      <strong>${{estate['price']}} </strong>
+    </h4>
+    <h4 class="lead" style="font-weight: bold; color: #000000">
+      <strong>
+        <a
+          href="http://maps.google.com/?q={{estate['address']}}"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="Click For Map"
+        >
+          <svg
+            style="height: 20px; width: 20px"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          {{estate['address']}}
+        </a></strong
+      >
+    </h4>
+    <p class="lead">{{estate['body'] | safe}}</p>
+    <hr />
+    <h1
+      class="lead text-primary text-center"
+      style="
+        font-weight: bold;
+        color: #000000;
+        display: flex;
+        align-items: center;
+      "
+    >
+      <svg
+        style="height: 20px; width: 20px"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+          clip-rule="evenodd"
+        ></path>
+      </svg>
+      Photos
+    </h1>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
         <div class="row">
-           {% for i in estate['image']%}
-            <a href="{{i['photo']}}" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-                <img src="{{i['photo']}}" class="img-fluid">
-            </a>
-            {% endfor %}
+          {% for i in estate['image']%}
+          <a
+            href="{{i['photo']}}"
+            data-toggle="lightbox"
+            data-gallery="example-gallery"
+            class="col-sm-4"
+          >
+            <img src="{{i['photo']}}" class="img-fluid" />
+          </a>
+          {% endfor %}
         </div>
+      </div>
     </div>
+  </div>
 </div>
-       
-      
-           </div>
-         </div>
-       
+<div class="col-md-6 mt-2">
+  <!-- Contact Realtor -->
+  <div class="p-4 card sticky-top" style="z-index: inherit">
+    <form
+      method="POST"
+      id="contactform"
+      action="https://formspree.io/twreZim@gmail.com"
+      enctype="multipart/form-data"
+    >
+      <h1 class="display-4 text-center text-responsive m-2 pt-5">
+        Contact Realtor
+      </h1>
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          name="name"
+          placeholder="joe Doe"
+        />
+      </div>
+      <div class="form-group">
+        <label for="name">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          placeholder="joe@email.com"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="name">Subject</label>
+        <input
+          type="text"
+          class="form-control"
+          name="subject"
+          placeholder="Interested"
+        />
+      </div>
+      <div class="form-group">
+        <label for="name">Phone Number</label>
+        <input
+          type="text"
+          class="form-control"
+          name="text"
+          placeholder="+123456789"
+        />
+      </div>
+      <div class="form-group">
+        <label for="name">Message</label>
+        <textarea class="form-control" name="message">
+ Hello I am interested in the property, {{estate['title']}} ,{{estate['address']}} ,property number {{estate['_id']}} | on https://www.twrezim.co.zw
+                                </textarea
+        >
+      </div>
+
+      <input class="btn btn-primary" type="submit" value="Send Message" />
+    </form>
+  </div>
 </div>
-        <div class="col-md-6  mt-2">
-            <!-- Contact Realtor -->
-            <div class="p-4  card sticky-top" style="z-index: inherit;">
-        
-                
-                        <form method="POST" id="contactform" action="https://formspree.io/twreZim@gmail.com" encType="multipart/form-data">
-
-                            <h1 class="display-4 text-center text-responsive m-2 pt-5">
-                                Contact Realtor
-                                </h1>
-                           
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control" name="name" placeholder="joe Doe">
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Email</label>
-                                <input type="email" class="form-control" name="email" placeholder="joe@email.com">
-                            </div>
-        
-                            <div class="form-group">
-                                <label for="name">Subject</label>
-                                <input type="text" class="form-control" name="subject" placeholder="Interested">
-                                
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Phone Number</label>
-                                <input type="text" class="form-control" name="text" placeholder="+123456789">
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Message</label>
-                                <textarea class="form-control" name="message"
-                                 > Hello I am interested in the, {{estate['title']}} ,{{estate['address']}} ,property number {{estate['_id']}} | on https://www.twre.co.zw
-                                </textarea>
-                            </div>
-                    
-                        
-                             <input class="btn btn-primary " type="submit" value="Click Here">
-
-                        </form>
-                    
-        
-                </div>
-        
-        </div>

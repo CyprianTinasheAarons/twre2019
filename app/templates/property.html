@@ -1,17 +1,17 @@
+{% extends 'base.html' %} {% block content %}
 
-{%  extends 'base.html' %}
-{% block content %}
+<br />
 
-<br>         
+<div class="row p-4">{% include '_property.html' %}</div>
 
-
-    <div class="row p-4">
-                    {% include '_property.html' %}
-           
-    </div>
-   
-<h1 class="lead m-2 text-center">
-    <a class="btn btn-light border border-primary" href="/properties"> <i class="fa fa-home"></i>Go To Properties</a>
+<h1 class="lead mb-5 pb-5 text-center">
+  <a
+    class="btn btn-primary text-white btn-lg"
+    href="/properties"
+    style="cursor: pointer"
+  >
+    <i class="fa fa-home"></i> Go Back To Properties</a
+  >
 </h1>
-    
+
 {% endblock %}

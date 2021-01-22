@@ -1,39 +1,30 @@
-
-{% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
-
-{% block content %}
-<br>
+{% extends "base.html" %} {% import "bootstrap/wtf.html" as wtf %} {% block
+content %}
+<br />
 <div class="row">
-               
-        <div class="col-lg-4 mx-auto">
-                
-                        <div class="card bg-light border border-primary  ">
-                                        <div class="card-body">
-                                            <div class="card-title">
-                                             <h1 class="display-4 text-responsive">
-                                                    Sign Up
-                                             </h1>
-                                            </div>
-                                         <div id="signup"
-                                         class="lead text-muted ">
-                                                {{ wtf.quick_form(form) }}
-                                         </div>
-                        
-                                        </div>
-                                    </div>
+  <div class="col-lg-4 mx-auto">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">
+          <h1
+            class="display-4 text-responsive"
+            style="display: flex; justify-content: center"
+          >
+            Sign Up
+          </h1>
         </div>
-      
+        <div id="signup" class="lead text-muted">
+          {{ wtf.quick_form(form) }}
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<br>
+<br />
 <style>
-       #signup {
+  #signup {
     border-radius: 0;
-} 
+  }
 </style>
-        {% endblock %}
-
-
-    
-  
+{% endblock %}

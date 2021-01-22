@@ -12,16 +12,21 @@
      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
       <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
       <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/ekko-lightbox.css') }}">
-    
-
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> 
     <link rel="icon" href="{{ url_for('static', filename='img/Rent_25px.png') }}">
     <meta name="google-site-verification" content="XKeUvCcX_-KFI0MG_ogRcMMuOolFVsgDJKEyTQHG3yc" />
     {{ moment.include_jquery() }}
     {{ moment.include_moment() }}
-   {% block title %} <title>TWRE</title> {% endblock %}
+   {% block title %} <title>TWRE: The Best Real Estate Company In Zimbabwe</title> {% endblock %}
 
     {% endblock %}
     <style>
+
+      body {
+        font-family: 'Roboto', sans-serif;
+        
+      }
     .dropdown-menu {
     width: 300px !important;
  
@@ -94,23 +99,31 @@
   }
 }
 .carousel-image-1 {
-  background: url("https://res.cloudinary.com/twre/image/upload/v1560943777/website/architectural-design-architecture-country-home-2287310_jpzc9p.jpg");
+  background: url("https://res.cloudinary.com/twre/image/upload/v1611324747/website/pexels-binyamin-mellish-1396122_kc2frv.jpg");
   background-size: cover; }
 
 .carousel-image-2 {
-  background: url("https://res.cloudinary.com/twre/image/upload/v1560943775/website/architectural-design-architecture-contemporary-1884256_et8l5u.jpg");
+  background: url("https://res.cloudinary.com/twre/image/upload/v1611324746/website/pexels-binyamin-mellish-106399_1_n2p0oo.jpg");
   background-size: cover; }
 
 .carousel-image-3 {
-  background: url("https://res.cloudinary.com/twre/image/upload/v1560943771/website/aerial-view-architecture-cars-280221_vpaj0p.jpg");
+  background: url("https://res.cloudinary.com/twre/image/upload/v1611324746/website/pexels-pixabay-164558_wfotgh.jpg");
   background-size: cover; }
 
 .easyPaginateNav a {padding:5px;}
 .easyPaginateNav a.current {font-weight:bold;text-decoration:underline;}
+.page {
+  padding: 10px;
+}
+.pagination .active {
+  text-decoration:underline;
+  color: #000000;
+  font-weight: bolder;
+}
     </style>
 </head>
 <body onload="myFunction()">
-   <div class="container-fluid">
+   <div>
 {% block navbar %}
 
            <nav class="navbar navbar-expand-lg sticky-top navbar-light  p-2 " >
@@ -118,7 +131,7 @@
                     <a href="" class="navbar-brand mx-2">
                         <img src="{{ url_for ('static' , filename='img/twre.png')}}"  width="50" height="50"  alt="">
                     </a>
-                    <h3 class="d-inline align-middle lead mx-4">TWRE</h3>
+                    <!-- <h3 class="d-inline align-middle lead mx-4">TWRE</h3> -->
                     <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
                         <span class="navbar-toggler-icon">
         
@@ -135,13 +148,12 @@
             <li class="nav-item">
                     <a href="/properties" class="nav-link">Properties</a>
                 </li>
-                <li class="nav-item">
-                        <a href="/blog" class="nav-link">Blog</a>
-                    </li>
+          
+                  
                     <li class="nav-item">
-                            <a href="/about" class="nav-link">About</a>
+                            <a href="#contact" class="nav-link">Contact Us</a>
         
-                        </li>
+                        </li> 
                         
                             
                      {% if current_user.is_authenticated %}
@@ -215,31 +227,33 @@
       </div>
       </div>
 <!-- contact us -->
-<section  class="bg-light text-muted py-5" id="contact">
+<section  class="bg-light text-muted py-5 pt-5" id="contact">
     
             <div class="row">
                 <div class="col-md-6 p-4">
-                    <img  src="https://res.cloudinary.com/twre/image/upload/v1560943239/website/architecture-clouds-estate-280222_gzgw16.jpg" class="img-fluid mb-3 rounded-circle">
+                    <img  src="https://res.cloudinary.com/twre/image/upload/v1611324757/website/pexels-binyamin-mellish-1396132_djdli1.jpg" class="img-fluid mb-3 rounded-circle">
                 </div>
             
             <div class="col-md-6">
-                <h3 class="display-4 p-4 text-responsive">Contact Us</h3>
+                <h3 class="display-4 p-4 text-responsive" >Contact Us</h3>
                 <div class="d-flex flex-row">
                     <div class="p-4 align-self-align">
                         <i class="fa fa-home"></i>
                     </div>
                     <div class="p-4 align-self-end">
-                         <p class="text-muted lead"><strong>Harare Address: </strong>275 H.Chitepo Ave,PO Box CY 474 Causeway Harare</p>
+                         <p class="text-muted lead"  >275 H.Chitepo Ave </p>
+                          <p class="text-muted lead"  > PO Box CY 474 Causeway </p>
+                            <p class="text-muted lead"  > Harare</p>
                     </div>
                 </div>
                 <div class="d-flex flex-row">
                     <div class="p-4 align-self-align">
                         <i class="fa fa-envelope"></i>
                     </div>
-                    <div class="p-4 align-self-end lead">
-                            <p><strong>Email:</strong></p>
-                            <a href="mailto:sales@twre.co.zw" class="text-muted">Sales@twre.co.zw</a>
-                            <a href="mailto:sales@twre.co.zw" class="text-muted">/Letting@twre.co.zw</a>
+                    <div class="p-4 align-self-end lead"  >
+                           
+                            <a href="mailto:sales@twre.co.zw" class="text-muted" style="cursor: pointer;">Sales@twre.co.zw</a>
+                            <a href="mailto:sales@twre.co.zw" class="text-muted" style="cursor: pointer;">/Letting@twre.co.zw</a>
 
                     </div>
                 </div>
@@ -247,12 +261,15 @@
                         <div class="p-4 align-self-align">
                             <i class="fa fa-whatsapp"></i>
                         </div>
-                        <div class="p-4 align-self-end lead">
-                                <p></p><strong>Whatsapp:</strong></p>
-                                <a href="https://api.whatsapp.com/send?phone=263777918118" class="text-muted">+263777918118
-                                    </a>
-                                    <a href="https://api.whatsapp.com/send?phone=263712388158" class="text-muted">+263712388158
+                        <div class="p-4 align-self-end lead"  >
+                               
+                                <a href="https://api.whatsapp.com/send?phone=263777918118" class="text-muted" style="cursor: pointer;">+263777918118
+                                    </a><br>
+                                    <a href="https://api.whatsapp.com/send?phone=263712388158" class="text-muted" style="cursor: pointer;">+263712388158
+                                        </a><br>
+                                        <a href="https://api.whatsapp.com/send?phone=263777150345" class="text-muted" style="cursor: pointer;">+263777150345
                                         </a>
+                                     
                         </div>
                     </div>
             </div>
@@ -265,13 +282,13 @@
 <section class="m-1 border border-white " >
         
                 <h1 class="display-4 text-center">
-                        Help 
+                  <svg style="height:40px;width:40px" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>    Help 
                     </h1>
             <div class="row ">
                 <div class="col">
                     <p class="lead text-center">
-                        For any queries related to your user experience with our web application .Get in touch with us via this link
-                       <a href="mailto:help@twre.co.zw">Contact  Us</a>
+                        For any queries related to your user experience with our web application. Get in touch with us via this link
+                       <a href="mailto:help@twre.co.zw" target="_blank" style="cursor: pointer;font-weight: bold; font-size: 1.25em;">Contact  Us</a>
                     </p>
                 </div>
             
@@ -296,20 +313,17 @@
                             </p>
                     </div>
                     <div class="col-md-6 ">
-                                        <h4 class="text-center  text-white display-4 p-4"> Hours </h4>
-                                        <p class="lead  text-white text-center">Monday-Friday &emsp;08 AM-16 PM</p>
+                                        <h4 class="text-center  text-white display-4 p-4"> <svg style="height: 4opx;width:40px;" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>Hours </h4>
+                                        <p class="lead  text-white text-center">Monday-Friday &emsp;08 AM-15 PM</p>
                                      <p class="lead  text-white text-center">   Saturday-Sunday &emsp;Closed</p>    
                     </div>
                 </div>             
                                                 
 <div class="row"><div class="col text-center">
-        <p class="lead text-white" >Copyright  &copy; 2019 All rights reserved|Website designed by <a href="https://www.cyprianaarons.co.zw" class="text-white"> Topia263</a></p>
+        <p class="lead text-white" >Copyright  &copy; 2020 All rights reserved | Website designed by <a href="https://www.cyprianaarons.co.zw" class="text-white" target="_blank" style="cursor: pointer;"> Cyprian Aarons</a></p>
 
                         
-        <a href="mailto:youla@twre.co.zw" >
-                <button class="btn btn-light text-primary border border-primary " >Email Us</button>
-        </a>
-       
+    
 </div></div>
    <br>
                    
@@ -355,7 +369,7 @@ $(function () {
 var myVar;
 
 function myFunction() {
-  myVar = setTimeout(showPage, 2000);
+  myVar = setTimeout(showPage, 2);
 }
 
 function showPage() {
