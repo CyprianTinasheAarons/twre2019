@@ -25,7 +25,7 @@ Flask-Uploads==0.2.1
 Flask-WTF==0.14.2 
 gunicorn==19.9.0
 ItsDangerous==1.1.0
-Jinja2==2.10
+Jinja2==2.10.1
 Mako==1.0.7
 Markdown==3.0.1
 pymongo==3.7.2
