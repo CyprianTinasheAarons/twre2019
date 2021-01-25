@@ -49,7 +49,7 @@ def home():
         address = i['Address']
         image = i['Photos']
         estates.append([ _id,title, category , price , address , image])
-    return render_template('home.html', estates=estates )
+    return render_template('home.html', estates=estates , isShow=True )
 
 @main.route('/sitemap.xml', methods=['GET'])
 def sitemap():
@@ -70,7 +70,7 @@ def properties():
         photos = i['Photos']
         estates.append([ _id,title, category , price , address , photos])
     
-    return render_template('properties.html', estates=estates )
+    return render_template('properties.html', estates=estates  ,isShow=True )
 
     
 @main.route('/blog',methods=['GET','POST'])
@@ -107,7 +107,7 @@ def user():
         }
     if user is None:
         abort(404)
-    return render_template('user.html' , user=user)
+    return render_template('user.html' , user=user , isShow=True)
 
 @main.route('/edit-profile', methods=['GET', 'POST'])
 @login_required
@@ -134,7 +134,7 @@ def edit_profile():
     form.location.data = oldLocation
     form.about_me.data = oldAboutme
     
-    return render_template('edit_profile.html', form=form)   
+    return render_template('edit_profile.html', form=form, isShow=True)   
 
 @main.route('/post/<int:id>', methods=['GET', 'POST'])
 def post(id):
@@ -168,7 +168,7 @@ def property(id):
             'image': i['Photos']
         }
     
-    return render_template('property.html', estate=estate )
+    return render_template('property.html', estate=estate ,isShow=True )
 
 #Administration dashboard of the website
 @main.route('/admin')
@@ -178,7 +178,7 @@ def admin():
     count_posts = mongo.db.Posts.count()
     count_estates = mongo.db.Estates.count()
     count_users = mongo.db.Users.count()
-    return render_template('admin.html' , count_posts=count_posts,count_estates=count_estates,count_users=count_users )
+    return render_template('admin.html' , count_posts=count_posts,count_estates=count_estates,count_users=count_users ,isShow=True )
 
 
 @main.route('/admin/properties' ,methods=['GET' , 'POST'])
@@ -215,7 +215,7 @@ def admin_properties():
             author=i['username']
         mongo.db.Estates.insert({ '_id': getNextSequence(mongo.db.Counters,"estateId"),'Author':author , 'Title' : request.form['title'], 'Category' : request.form['category'] ,'Address': request.form['address'],'Price': int(request.form['price']),'Body': request.form['body'],'Photos': photo_filenames ,'Date' : datetime.now()})
         return redirect(url_for('.properties'))
-    return render_template('admin-properties.html', form2=form2, propertyList=propertyList )
+    return render_template('admin-properties.html', form2=form2, propertyList=propertyList ,isShow=True )
 
 
 
@@ -241,7 +241,7 @@ def admin_posts():
             
         mongo.db.Posts.insert({ '_id': getNextSequence(mongo.db.Counters,"postId"),'Title' : request.form['title'], 'Summary' : request.form['summary'] ,'Body': request.form['body'],'Image_url': photo_url , 'Date': datetime.now()})
         return redirect(url_for('.blog'))
-    return render_template('admin-posts.html',form2=form2, postsList=postsList  )
+    return render_template('admin-posts.html',form2=form2, postsList=postsList  ,isShow=True )
 
 
 
@@ -258,7 +258,7 @@ def admin_users():
             date = i["Date"]
             usersList.append([ _id ,username,email ,date])
 
-    return render_template('admin-users.html' ,usersList=usersList  )
+    return render_template('admin-users.html' ,usersList=usersList ,isShow=True  )
 
 @main.route('/admin/user_delete/<int:id>', methods=[ 'GET','POST'])
 @login_required
@@ -318,7 +318,7 @@ def edit_property (id):
     form.price.data = oldPrice
     form.address.data = oldAddress
     form.body.data = oldBody
-    return render_template('edit_property.html', form=form)
+    return render_template('edit_property.html', form=form ,isShow=True )
 
 @main.route('/admin/property_delete/<int:id>', methods=[ 'GET','POST'])
 @login_required
@@ -354,7 +354,7 @@ def edit(id):
     form.title.data = oldTitle
     form.summary.data = oldSummary
     form.body.data = oldBody
-    return render_template('edit_post.html', form=form)
+    return render_template('edit_post.html', form=form ,isShow=True )
 
 @main.route('/admin/post_delete/<int:id>', methods=[ 'GET','POST'])
 @login_required
@@ -389,4 +389,4 @@ def edit_profile_admin(id):
     form.name.data = oldName
     form.location.data = oldLocation
     form.about_me.data = oldAboutme
-    return render_template('edit_profile.html', form=form)
+    return render_template('edit_profile.html', form=form ,isShow=True )

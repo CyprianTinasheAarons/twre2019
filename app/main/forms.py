@@ -4,7 +4,6 @@ from wtforms.validators import Required, Length ,Regexp,Email
 from wtforms import ValidationError
 from flask_wtf.file import FileField, FileAllowed, FileRequired 
 
-
 class EditProfileForm(FlaskForm):
     name = StringField('Real name', validators=[Length(0, 64)])
     location = StringField('Location', validators=[Length(0, 64)])

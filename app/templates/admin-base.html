@@ -31,14 +31,14 @@
     {% endblock %}
 </head>
 <body>
-    <div class="container-fluid">
+    <div >
 {% block navbar %}
         <nav class="navbar navbar-expand-lg  sticky-top navbar-light p-2" >
             
                     <a href="" class="navbar-brand mx-2">
                         <img src="{{ url_for('static', filename='img/twre.png')}}" width="50" height="50"  alt="">
                     </a>
-                    <h3 class="d-inline align-middle lead mx-4">TWRE</h3>
+            
                     <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
                         <span class="navbar-toggler-icon">
         
@@ -55,13 +55,13 @@
             <li class="nav-item">
                     <a href="/properties" class="nav-link">Properties</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                         <a href="/blog" class="nav-link">Blog</a>
                     </li>
                     <li class="nav-item">
                             <a href="/about" class="nav-link">About</a>
         
-                        </li>
+                        </li> -->
                         
                             
                     {% if current_user.is_authenticated %}
@@ -101,11 +101,11 @@
 
 {% endblock %}
 
-<br>
 
+<!-- 
 <h1 class="lead mx-2">
     <a class="btn btn-light border border-primary" href="/admin"> <i class="fa fa-arrow-left"></i>     Dashboard</a>
-</h1>
+</h1> -->
 
 {% for message in get_flashed_messages() %}
 <div class="alert alert-light  bg-primary text-white p-2 m-2 floating-alert text-center">
@@ -121,26 +121,6 @@
    
         {% endblock %}
 
-<!-- footer -->
-<footer id="main-footer" class="bg-primary  ">
-        
-            <div class="row">
-                <div class="col">
-                    <h4  class="text-center display-4  text-white text-center" >T.W.R.E ZIMBABWE </h4>
-                
-                                            
-<div class="row"><div class="col text-center">
-    <p class="lead text-white" >Copyright  &copy; 2019 All rights reserved|Website designed by <a href="www.cyprianaarons.co.zw" class="text-white"> Topia263</a></p>
-
-            
-   
-</div></div>
-<br>
-               
-                </div>
-            </div>
-        
-    </footer>
       </div>
 
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>

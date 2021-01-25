@@ -18,7 +18,6 @@ salt = b'$2b$07$Kw/qwGlHgmUwSgX4InYrMe'
 
 def getNextSequence(collection,name):
      return collection.find_and_modify(query= { '_id': name },update= { '$inc': {'seq': 1}}, new=True ).get('seq')
-
 @auth.route('/auth/login' , methods =['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -39,7 +38,7 @@ def login():
                 else:
                     return redirect(url_for('main.home'))
         flash('Invalid username or password?')
-    return render_template('auth/login.html', form=form)
+    return render_template('auth/login.html', form=form )
 
 
 

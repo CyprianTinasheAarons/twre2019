@@ -43,6 +43,8 @@
     #btn{
         background-color:#880e4f;
         color: white;
+        width: 100%;
+        padding: 1em;
 
     }
 #center{
@@ -124,6 +126,7 @@
 </head>
 <body onload="myFunction()">
    <div>
+     {% if isShow %}
 {% block navbar %}
 
            <nav class="navbar navbar-expand-lg sticky-top navbar-light  p-2 " >
@@ -182,11 +185,11 @@
             
       
                                     <li> <div class="d-flex flex-row justify-content-center">
-                                        <div class="p-2"><a href="https://www.facebook.com/twre.zim.7"><i class="fa fa-facebook"></i></a></div>
-                                        <div class="p-2"><a href="https://www.twitter.com/twrezim"><i class="fa fa-twitter"></i></a></div>
-                                        <div class="p-2"><a href="https://www.instagram.com/twrezim"><i class="fa fa-instagram"></i></a></div>
-                                        <div class="p-2"><a href="https://api.whatsapp.com/send?phone=263777918118" ><i class="fa fa-whatsapp"></i></a></div>
-                                        <div class="p-2"><a href="mailto:youla@twre.co.zw"><i class="fa fa-envelope-o"></i></a></div>
+                                        <div class="p-2"><a target="_blank" href="https://www.facebook.com/twre.zim.7 "><i class="fa fa-facebook"></i></a></div>
+                                        <div class="p-2"><a target="_blank" href="https://www.twitter.com/twrezim"><i class="fa fa-twitter"></i></a></div>
+                                        <div class="p-2"><a target="_blank" href="https://www.instagram.com/twrezim"><i class="fa fa-instagram"></i></a></div>
+                                        <div class="p-2"><a target="_blank" href="https://api.whatsapp.com/send?phone=263777918118" ><i class="fa fa-whatsapp"></i></a></div>
+                                        <div class="p-2"><a target="_blank" href="mailto:youlam1976@gmail.com"><i class="fa fa-envelope-o"></i></a></div>
                                     </div></li>
         </ul>
                     </div>
@@ -197,6 +200,7 @@
      
 
 {% endblock %}
+{% endif %}
 
 {% for message in get_flashed_messages() %}
 <div class="alert alert-light  bg-primary text-white p-2 m-2 floating-alert text-center">
@@ -207,25 +211,14 @@
 
 
 
-<div  style="display:none;" id="content">
+<div id="content">
         {% block content %}
         
         {% block page_content %}{% endblock %}
      
         {% endblock %}</div>
 
-
-<!-- Preloader -->
-
-     <div class="row" id="loader">
-        <div class="col-md- bg " id="center" >
-        <div class="loader center-text" id="loader-2">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-      </div>
+        {% if isShow %}
 <!-- contact us -->
 <section  class="bg-light text-muted py-5 pt-5" id="contact">
     
@@ -252,8 +245,8 @@
                     </div>
                     <div class="p-4 align-self-end lead"  >
                            
-                            <a href="mailto:sales@twre.co.zw" class="text-muted" style="cursor: pointer;">Sales@twre.co.zw</a>
-                            <a href="mailto:sales@twre.co.zw" class="text-muted" style="cursor: pointer;">/Letting@twre.co.zw</a>
+                            <a href="mailto:youlam1976@gmail.com" class="text-muted" style="cursor: pointer;" target="_blank">Sales@twre.co.zw</a>
+                            <a href="mailto:youlam1976@gmail.com" class="text-muted" style="cursor: pointer;" target="_blank">/Letting@twre.co.zw</a>
 
                     </div>
                 </div>
@@ -329,6 +322,8 @@
                    
                       
         </footer>
+
+        {% endif %}
     
 </div>
 
@@ -365,18 +360,7 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
 </script>
-<script>
-var myVar;
 
-function myFunction() {
-  myVar = setTimeout(showPage, 2);
-}
-
-function showPage() {
-  document.getElementById("loader").style.display = "none";
-  document.getElementById("content").style.display = "block";
-}
-</script>
 
 <!-- Start of Tawk.to Script -->
 <script type="text/javascript">

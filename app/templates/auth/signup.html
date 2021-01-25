@@ -1,11 +1,23 @@
 {% extends "base.html" %} {% import "bootstrap/wtf.html" as wtf %} {% block
 content %}
 <br />
-<div class="row">
+<div class="row pt-5 mt-5">
   <div class="col-lg-4 mx-auto">
     <div class="card">
       <div class="card-body">
         <div class="card-title">
+          <a
+            href="/home"
+            class="navbar-brand mx-2"
+            style="display: flex; justify-content: center"
+          >
+            <img
+              src="{{ url_for ('static' , filename='img/twre.png')}}"
+              width="50"
+              height="50"
+              alt=""
+            />
+          </a>
           <h1
             class="display-4 text-responsive"
             style="display: flex; justify-content: center"
@@ -16,6 +28,10 @@ content %}
         <div id="signup" class="lead text-muted">
           {{ wtf.quick_form(form) }}
         </div>
+
+        <a href="/auth/login" style="padding: 1em 0; cursor: pointer">
+          Already have a Account? Login
+        </a>
       </div>
     </div>
   </div>
