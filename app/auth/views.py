@@ -24,7 +24,7 @@ def login():
     if form.validate_on_submit():
         users = mongo.db.Users
         loginuser_json = users.find_one({'email' : request.form['email']})
-        query= users.find({'email': request.form['email']},{'role':'1'})
+        query= users.find({'email': request.form['email']})
         for i in query:
             dbRole = i['role']
         if loginuser_json:

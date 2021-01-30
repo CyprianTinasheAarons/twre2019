@@ -19,7 +19,7 @@ def admin_required(f):
     @wraps(f)
     def  wrap(*args, **kwargs):
         users = mongo.db.Users
-        query= users.find({'email': session['email'] },{'role':'1'})
+        query= users.find({'email': session['email'] })
         for i in query:
             dbRole = i['role']
             if dbRole != 'admin':
@@ -40,7 +40,7 @@ def delete(collection,uniqueid):
 @cache.cached(timeout=300, key_prefix="home")
 def home():
     estates =[]
-    query = mongo.db.Estates.find({}, {"_id":"1" ,"Title":"1", "Category":"1","Price":"1" ,"Address":"1" ,"Photos": "1"  }).limit(8).sort("_id" ,-1)
+    query = mongo.db.Estates.find({}).limit(8).sort("_id" ,-1)
     for i in query:
         _id =i['_id']
         title = i['Title']
@@ -60,7 +60,7 @@ def sitemap():
 def properties():
     estatesDB=mongo.db.Estates
     estates =[]
-    query=estatesDB.find({},{"_id":"1" ,"Title":"1", "Category":"1","Price":"1" ,"Address":"1" ,"Photos": "1"  }).sort("_id" ,-1)
+    query=estatesDB.find({}).sort("_id" ,-1)
     for i in query:
         _id = i['_id']
         title = i['Title']
@@ -77,7 +77,7 @@ def properties():
 @cache.cached(timeout=300, key_prefix="blog")
 def blog():
     posts = []
-    query = mongo.db.Posts.find({},{"_id": "1" , "Title": "1" ,"Summary": "1" , "Image_url" : "" }).sort('_id' , -1)
+    query = mongo.db.Posts.find({}).sort('_id' , -1)
     for  i in query:
         _id = i['_id']
         title = i['Title']
@@ -95,7 +95,7 @@ def about():
 @main.route('/user')
 @cache.cached(timeout=300, key_prefix="user")
 def user():
-    query = mongo.db.Users.find({'email' : session['email'] },{'username': '1', 'email': '1', 'name': '1','location': '1','about_me' : '1'})
+    query = mongo.db.Users.find({'email' : session['email'] },{})
     user ={}
     for i in query:
         user={
@@ -112,7 +112,7 @@ def user():
 @main.route('/edit-profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
-    query = mongo.db.Users.find({'email': session['email']},{'_id': '1' ,'password':'1', 'email': '1', 'username': '1', 'name': '1' , 'location': '1', 'about_me': '1' ,'role': '1', 'Date':'1'})
+    query = mongo.db.Users.find({'email': session['email']})
     for i in query:
         oldId = i['_id']
         oldPassword = i['password']
@@ -138,7 +138,7 @@ def edit_profile():
 
 @main.route('/post/<int:id>', methods=['GET', 'POST'])
 def post(id):
-    query = mongo.db.Posts.find({"_id": id }, {"_id":"1", "Title":"1", "Body":"1"  ,"Image_url": "1" , "Date" : "1"   })
+    query = mongo.db.Posts.find({"_id": id })
     post ={}
 
     for i in query:
@@ -154,7 +154,7 @@ def post(id):
 
 @main.route('/property/<int:id>', methods=['GET', 'POST'])
 def property(id):
-    query = mongo.db.Estates.find({"_id": id }, {"_id":"1", "Title":"1", "Category":"1","Price":"1" ,"Address":"1", "Body" :"1" ,"Photos": "1"   })
+    query = mongo.db.Estates.find({"_id": id })
     estate = {}
 
     for i in query:
@@ -186,7 +186,7 @@ def admin():
 @admin_required
 def admin_properties():
     propertyList =[]
-    query = mongo.db.Estates.find({},{"_id":"1" ,"Title":"1", "Category":"1","Price":"1" ,"Address":"1","Date": "1","Author" : "1"})
+    query = mongo.db.Estates.find({})
     for i in query:
             _id = i['_id']
             authorName=i['Author']
@@ -226,7 +226,7 @@ def admin_properties():
 @admin_required
 def admin_posts():
     postsList =[]
-    query = mongo.db.Posts.find({},{"_id": "1" , "Title": "1" , "Date" : "1"})
+    query = mongo.db.Posts.find({})
     for  i in query:
         _id = i['_id']
         title = i['Title']
@@ -264,7 +264,7 @@ def admin_users():
 @login_required
 @admin_required
 def delete_user (id):
-    query = mongo.db.Users.find({'_id': id},{'email': '1'})
+    query = mongo.db.Users.find({'_id': id})
     for i in query:
         delete_email = i['email']
     if session['email'] == delete_email:
@@ -279,7 +279,7 @@ def delete_user (id):
 @login_required
 @admin_required
 def edit_property (id):
-    query = mongo.db.Estates.find({'_id' : id }, {"Author" : "1", "Title":"1", "Category":"1","Price":"1" ,"Address":"1", "Body" :"1", "Photos": "1" ,"Date": "1"})
+    query = mongo.db.Estates.find({'_id' : id })
 
     for i in query:
         oldAuthor = i['Author']
@@ -334,8 +334,7 @@ def delete_property (id):
 @login_required
 @admin_required
 def edit(id):
-    query =mongo.db.Posts.find({'_id': id},{ "Title": "1", "Summary": "1", "Body": "1" ,"Date":"1"
-    })
+    query =mongo.db.Posts.find({'_id': id})
 
     for  i in query:
         oldTitle = i['Title']
@@ -368,7 +367,7 @@ def delete_post (id):
 @login_required
 @admin_required
 def edit_profile_admin(id):
-    query = mongo.db.Users.find({'_id' : id},{'_id': '1' ,'password':'1', 'email': '1', 'username': '1', 'name': '1' , 'location': '1', 'about_me': '1' , 'Date':'1'})
+    query = mongo.db.Users.find({'_id' : id})
     for i in query:
         oldId = i['_id']
         oldPassword = i['password']
